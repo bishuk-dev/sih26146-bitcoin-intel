@@ -15,19 +15,26 @@ and rank investigative leads.
 - **Output must be a ranked, explainable alert list** — a risk score alone is not enough;
   every flag needs a human-readable "why."
 
-## Open decision — resolve before ML work starts
+## ML approach — decided
 
-The two research passes that informed this repo disagree on the ML approach:
+**Primary detection: Isolation Forest (unsupervised) + DBSCAN/HDBSCAN (entity clustering).**
+Random Forest is an optional bonus layer only, not the primary path.
 
-| | Assumes | Model |
-|---|---|---|
-| Path A | Labeled synthetic data (you inject ground-truth labels during generation) | Random Forest (supervised) — matches Weber et al. 2019 benchmark on the Elliptic dataset |
-| Path B | No reliable labels | Isolation Forest / DBSCAN-HDBSCAN (unsupervised anomaly detection + clustering) |
+Why: the real Elliptic dataset this problem is benchmarked against is only ~23%
+labeled (77% unknown) — label scarcity is the realistic condition here, not an
+edge case. More importantly, since we generate our own synthetic dataset, training
+a supervised model on self-injected labels risks just re-learning our own
+generator's rules, which is a fair thing for judges to call out. Isolation Forest
+is the standard tool for exactly this "no reliable ground truth" class of problem.
 
-**Decide this in `data/generator/` first** — if you inject labeled anomalous wallets
-into the synthetic generator, go Path A. If you want the system to discover anomalies
-without ever seeing a label, go Path B. This choice determines the entire contract
-of `src/ml/`, so lock it before other modules build against it.
+**Ground-truth labels still get generated in `data/generator/` — for evaluation
+only, never fed into training.** This is what lets us report real precision/recall/F1
+numbers ("detected X% of injected anomalous wallets at Y% precision") without the
+circular-reasoning problem of training and testing on the same self-authored rules.
+
+If time permits after the primary pipeline works end-to-end, a Random Forest trained
+on the held-out labels can be added as a secondary signal into `src/scoring` — framed
+explicitly as a bonus ensemble layer, not the core detection method.
 
 ## Architecture
 
