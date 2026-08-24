@@ -1,16 +1,21 @@
-# Role Assignments
+# Team Role Assignments
 
-Modules are defined by natural system boundaries (see README architecture),
-not split evenly for the sake of it. Map your actual teammates' strengths
-onto these — merge or split modules depending on team size.
+The detailed team analysis, learning roadmaps, module ownership, integration contracts,
+and demo plan now live in the static team website:
 
-| Module | Owns | Best fit for someone who... |
+**[Open the SIH26146 Team Operating Manual](./index.html)**
+
+The site is intentionally plain HTML/CSS/JS so the repository can be published directly
+from GitHub Pages using the repository's `docs/` folder. It has no runtime CDN, framework,
+or build step.
+
+## Quick ownership map
+
+| Member | Role | Owns |
 |---|---|---|
-| Data + Synthetic Generation | `data/generator/`, `src/ingestion/` | Likes data modeling, is comfortable owning the labeled-vs-unlabeled decision |
-| Graph Engine | `src/graph/` | Enjoys graph theory / NetworkX, entity resolution logic |
-| ML Core | `src/ml/` | Strongest in ML — owns whichever path (A/B) the team picks, plus SHAP |
-| Risk Scoring | `src/scoring/` | Good at systems/integration thinking — this module depends on both graph and ML output |
-| Dashboard | `dashboard/` | Frontend/UX instinct — this is what judges actually see and click |
-| DevOps + Offline Packaging + Docs | `docker/`, `scripts/`, writeup, pitch | Detail-oriented, good at "make it actually work under constraints" — also naturally ends up owning the pitch narrative since they understand the whole system's constraints best |
-
-TODO: fill in names once team roster is confirmed.
+| M1 | Data + Synthetic Generation | `data/generator/`, `src/ingestion/` |
+| M2 | Graph + Entity Resolution | `src/graph/` |
+| M3 | ML + Clustering | `src/ml/` |
+| M4 | Risk + Integration | `src/scoring/`, `src/pipeline.py`, integration tests |
+| M5 | Dashboard + Offline | `dashboard/`, `docker/`, `scripts/` |
+| M6 | QA + Docs + Demo | `docs/`, QA matrix, demo script, judge Q&A |

@@ -87,3 +87,7 @@ the deadline — this is the single most common way teams lose points on this PS
 ## Team / role assignments
 
 See `docs/role_assignments.md`.
+
+### Team website
+
+The detailed role roadmaps and integration guide live in `docs/index.html`. Because the site is plain HTML/CSS/JS with no external assets, GitHub Pages can serve it directly from the `docs/` folder.

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09111f">
+  <meta name="description" content="SIH26146 team operating manual — roles, learning roadmaps, module contracts, and the complete build flow.">
+  <title>SIH26146 · Team Operating Manual</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">₿</div>
+        <div>
+          <div class="eyebrow">SIH 2026 · NTRO</div>
+          <h1>Bitcoin Intel</h1>
+        </div>
+      </div>
+
+      <div class="sidebar-copy">
+        <p>Team operating manual for a six-person build: learn only what you need, own one module, integrate early.</p>
+      </div>
+
+      <nav class="role-nav" aria-label="Team sections">
+        <button class="nav-item active" data-tab="main"><span class="nav-dot accent"></span><span><strong>Main</strong><small>How everything fits</small></span></button>
+        <button class="nav-item" data-tab="m1"><span class="nav-dot cyan"></span><span><strong>M1 · Data</strong><small>Generator + ingestion</small></span></button>
+        <button class="nav-item" data-tab="m2"><span class="nav-dot violet"></span><span><strong>M2 · Graph</strong><small>Entity resolution</small></span></button>
+        <button class="nav-item" data-tab="m3"><span class="nav-dot green"></span><span><strong>M3 · ML</strong><small>Anomaly + clustering</small></span></button>
+        <button class="nav-item" data-tab="m4"><span class="nav-dot amber"></span><span><strong>M4 · Risk</strong><small>Fusion + integration</small></span></button>
+        <button class="nav-item" data-tab="m5"><span class="nav-dot pink"></span><span><strong>M5 · Product</strong><small>Dashboard + offline</small></span></button>
+        <button class="nav-item" data-tab="m6"><span class="nav-dot slate"></span><span><strong>M6 · QA</strong><small>Docs + demo</small></span></button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-pill"><span></span> Air-gapped by design</div>
+        <div class="tiny">Static docs site · GitHub Pages · no CDN</div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div>
+          <div class="eyebrow">TEAM BUILD SYSTEM</div>
+          <h2 id="pageTitle">Main · How everything fits</h2>
+        </div>
+        <div class="top-actions">
+          <div class="build-tag">36h build</div>
+          <button class="ghost-btn" id="copyLink">Copy tab link</button>
+        </div>
+      </header>
+
+      <section class="page active-page" data-page="main">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="kicker">THE RULE</div>
+            <h3>Don’t learn everything.<br><span>Own one layer.</span></h3>
+            <p class="lead">Five technical members own five system boundaries. One support member owns QA, documentation and demo readiness. Everyone learns the minimum concepts required to make their layer work.</p>
+            <div class="hero-note"><span class="note-icon">↳</span><span>Every module must expose a small working interface early. No one waits for the “finished” system.</span></div>
+          </div>
+          <div class="metric-stack">
+            <div class="metric-card"><span>Technical owners</span><strong>5</strong><small>one per core layer</small></div>
+            <div class="metric-card"><span>Support owner</span><strong>1</strong><small>QA · docs · demo</small></div>
+            <div class="metric-card"><span>Critical path</span><strong>6</strong><small>ingest → graph → ML → risk → UI</small></div>
+          </div>
+        </div>
+
+        <section class="section">
+          <div class="section-head"><div><div class="kicker">SYSTEM MAP</div><h4>The pipeline everyone must understand</h4></div><span class="section-chip">shared mental model</span></div>
+          <div class="pipeline">
+            <div class="pipeline-node cyan"><span class="node-num">01</span><b>M1</b><strong>Data</strong><small>CSV / JSON → clean tables</small></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipeline-node violet"><span class="node-num">02</span><b>M2</b><strong>Graph</strong><small>IP ↔ TX ↔ wallet</small></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipeline-node green"><span class="node-num">03</span><b>M3</b><strong>ML</strong><small>Isolation Forest + DBSCAN</small></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipeline-node amber"><span class="node-num">04</span><b>M4</b><strong>Risk</strong><small>signals → ranked alerts</small></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipeline-node pink"><span class="node-num">05</span><b>M5</b><strong>Product</strong><small>dashboard + offline run</small></div>
+          </div>
+          <div class="support-lane"><span class="lane-label">M6 · QA / docs / demo</span><span>validates every gate, captures evidence, scripts the final presentation</span></div>
+        </section>
+
+        <section class="section two-col">
+          <div class="panel accent-panel">
+            <div class="kicker">DESIGN DECISION</div>
+            <h4>Why hybrid, weighted toward unsupervised?</h4>
+            <p>Isolation Forest answers <b>“what is unusual?”</b>. DBSCAN answers <b>“which entities behave similarly?”</b>. The graph answers <b>“how are they connected?”</b>. Labels generated by our synthetic engine are kept for evaluation only, not training.</p>
+            <div class="mini-flow"><span>Anomaly</span><b>+</b><span>Cluster</span><b>+</b><span>Graph</span><b>+</b><span>Network</span><b>→</b><strong>Risk</strong></div>
+          </div>
+          <div class="panel">
+            <div class="kicker">DO NOT DO THIS</div>
+            <h4>Common ways the project gets derailed</h4>
+            <div class="bad-list">
+              <div><span>01</span><p>Everyone starts studying GNNs instead of implementing the MVP.</p></div>
+              <div><span>02</span><p>Six people change the same file and integration becomes the real bug.</p></div>
+              <div><span>03</span><p>Dashboard polish starts before the detector works on a 100-row dataset.</p></div>
+              <div><span>04</span><p>Offline is treated as a slide instead of an actual no-network test.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head"><div><div class="kicker">MODULE CONTRACTS</div><h4>Freeze these interfaces early</h4></div><span class="section-chip">integration rule</span></div>
+          <div class="contracts">
+            <div class="contract"><span class="contract-tag cyan-bg">M1 → M2</span><code>blockchain_df, network_df</code><p>Validated tables. No downstream module needs to know how parsing happened.</p></div>
+            <div class="contract"><span class="contract-tag violet-bg">M2 → M3</span><code>graph, graph_features</code><p>NetworkX graph plus one row per analytical entity.</p></div>
+            <div class="contract"><span class="contract-tag green-bg">M3 → M4</span><code>entity_id, anomaly_score, cluster_id</code><p>Model result without exposing the dashboard to model internals.</p></div>
+            <div class="contract"><span class="contract-tag amber-bg">M4 → M5</span><code>entity_id, risk_score, priority, reasons</code><p>Stable alert JSON. The UI consumes this contract, not ML code.</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head"><div><div class="kicker">SHARED MILESTONES</div><h4>Five gates to a working system</h4></div></div>
+          <div class="milestones">
+            <div class="mile"><span>G1</span><b>Data works</b><p>CSV / JSON → validated DataFrame</p><small>Owner · M1</small></div>
+            <div class="mile"><span>G2</span><b>Graph works</b><p>DataFrame → graph → features</p><small>Owner · M2</small></div>
+            <div class="mile"><span>G3</span><b>ML works</b><p>Features → anomaly + clusters</p><small>Owner · M3</small></div>
+            <div class="mile"><span>G4</span><b>Investigation works</b><p>ML + graph → ranked explanations</p><small>Owner · M4</small></div>
+            <div class="mile"><span>G5</span><b>Product works</b><p>Upload → investigate → offline</p><small>Owner · M5</small></div>
+          </div>
+        </section>
+      </section>
+
+      <section class="page" data-page="m1">
+        <div class="role-hero role-cyan"><div><span class="role-badge">M1 · DATA ENGINEER</span><h3>Make sure garbage never reaches the rest of the system.</h3><p>Own the synthetic world and the ingestion boundary. Your output becomes the input contract for the graph engineer.</p></div><div class="role-stat"><b>Own</b><span>data/generator/*<br>src/ingestion/*</span></div></div>
+        <div class="section two-col">
+          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Only the concepts you need</h4><ol class="learn-list"><li><b>Python + pandas</b><span>DataFrames, read_csv/read_json, filtering, groupby, merge, dtypes.</span></li><li><b>Validation</b><span>Missing fields, duplicates, invalid timestamps/IPs, numeric ranges.</span></li><li><b>Synthetic behavior</b><span>Normal, burst, fan-out, fan-in, chain, mixed scenarios.</span></li><li><b>Testing</b><span>Write small tests for accepted and rejected files.</span></li></ol></div>
+          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>data/generator/generate.py</code><code>src/ingestion/loader.py</code><code>tests/test_generator.py</code><code>tests/test_ingestion.py</code></div><div class="callout">Do not expose <code>ground_truth_anomalous</code> to ML training. It exists for post-hoc evaluation.</div></div>
+        </div>
+        <div class="section"><div class="section-head"><div><div class="kicker">SYNTHETIC ENGINE</div><h4>Generate behaviors, not random rows</h4></div></div><div class="behavior-grid"><div><b>NORMAL</b><span>ordinary payments, exchange use, miner payouts</span></div><div><b>BURST</b><span>normal activity followed by dense rapid transfers</span></div><div><b>FAN-OUT</b><span>one source distributes to many wallets</span></div><div><b>FAN-IN</b><span>many wallets consolidate into one</span></div><div><b>CHAIN</b><span>A → B → C → D with short inter-arrivals</span></div><div><b>MIXED</b><span>combined behaviors for harder tests</span></div></div></div>
+        <div class="section"><div class="section-head"><div><div class="kicker">HANDOFF</div><h4>Your contract to M2</h4></div></div><div class="handoff"><div><span>BLOCKCHAIN</span><code>timestamp · txid · input_wallet · output_wallet · amount · fee · script_type</code></div><div><span>NETWORK</span><code>timestamp · src_ip · dst_ip · src_port · dst_port · txid</code></div></div></div>
+        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>You're done when…</h4><p>You can give the loader a good file, missing-column file, duplicate file, empty file and malformed file and predict exactly what each should do.</p></div><div class="panel"><div class="kicker">DO NOT OVERLEARN</div><h4>Skip for now</h4><p>Bitcoin cryptography, blockchain internals, Spark, huge-scale distributed systems. Your job is reliable synthetic data and clean ingestion first.</p></div></div>
+      </section>
+
+      <section class="page" data-page="m2">
+        <div class="role-hero role-violet"><div><span class="role-badge">M2 · GRAPH ENGINEER</span><h3>Turn tables into relationships an investigator can follow.</h3><p>Own entity resolution, graph construction and graph-level features. Think in nodes, edges, paths and evidence.</p></div><div class="role-stat"><b>Own</b><span>src/graph/*</span></div></div>
+        <div class="section two-col">
+          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Graph basics → NetworkX → heuristics</h4><ol class="learn-list"><li><b>Graph vocabulary</b><span>Node, edge, directed graph, weighted graph, degree, path, neighbor.</span></li><li><b>NetworkX</b><span>MultiDiGraph, node/edge attributes, neighbors, degree and metrics.</span></li><li><b>Bitcoin entity thinking</b><span>TXs, wallets and IP observations are different node types.</span></li><li><b>CIO heuristic</b><span>Multiple inputs can suggest common ownership, but the link is a heuristic, not truth.</span></li></ol></div>
+          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>src/graph/build_graph.py</code><code>src/graph/cio.py</code><code>src/graph/features.py</code><code>tests/test_graph.py</code></div><div class="callout">Keep relationship provenance. Prefer <code>method=CIO</code> and a confidence/evidence score over pretending a heuristic is certain.</div></div>
+        </div>
+        <div class="section"><div class="section-head"><div><div class="kicker">TARGET GRAPH</div><h4>What the graph should look like</h4></div></div><div class="ascii-graph"><span class="g-ip">IP_01</span><i>observed</i><span class="arrow">↓</span><span class="g-tx">TX_100</span><div class="fork"><span><span class="g-wallet">W_A</span><small>input</small></span><span><span class="g-wallet">W_B</span><small>output</small></span></div><span class="arrow">↓</span><span class="g-tx">TX_101</span><div class="fork"><span class="g-wallet">W_C</span><span class="g-wallet">W_D</span></div></div></div>
+        <div class="section"><div class="section-head"><div><div class="kicker">FEATURE TABLE</div><h4>What M3 needs from you</h4></div></div><div class="feature-chips"><span>degree</span><span>in_degree</span><span>out_degree</span><span>PageRank</span><span>clustering</span><span>betweenness</span><span>unique_counterparties</span><span>cluster_size</span></div></div>
+        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>Build a toy graph first</h4><pre><code>A → B
+A → C
+A → D
+
+B → X
+C → X
+D → X</code></pre><p>Confirm A has high out-degree and X has high in-degree. Then replace the toy graph with real generated records.</p></div><div class="panel"><div class="kicker">DO NOT OVERLEARN</div><h4>Skip GNNs for now</h4><p>You do not need GraphSAGE or GAT to build the first working graph. The graph's most valuable job is correlation, features and evidence.</p></div></div>
+      </section>
+
+      <section class="page" data-page="m3">
+        <div class="role-hero role-green"><div><span class="role-badge">M3 · ML ENGINEER</span><h3>Answer “what is unusual?” and “which entities behave similarly?”</h3><p>Your critical path is simple: feature matrix → scaling → Isolation Forest → DBSCAN → evaluation. SHAP comes later.</p></div><div class="role-stat"><b>Own</b><span>src/ml/*</span></div></div>
+        <div class="section two-col">
+          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Don't drown in ML theory</h4><ol class="learn-list"><li><b>Feature vectors</b><span>Turn wallet behavior into numbers.</span></li><li><b>Standardization</b><span>Learn why features on very different scales need normalization.</span></li><li><b>Isolation Forest</b><span>Learn the idea of isolating unusual points, then implement it.</span></li><li><b>DBSCAN</b><span>Dense groups become clusters; sparse points become noise.</span></li><li><b>Evaluation</b><span>Use your synthetic labels only after prediction: precision, recall, F1.</span></li></ol></div>
+          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>src/ml/detect.py</code><code>src/ml/preprocess.py</code><code>src/ml/evaluate.py</code><code>src/ml/explain.py</code></div><div class="callout">Start with DBSCAN, not HDBSCAN. If the critical path is stable, experiment later. Never feed generator labels into training.</div></div>
+        </div>
+        <div class="section"><div class="section-head"><div><div class="kicker">MODEL ROLES</div><h4>Keep the jobs separate</h4></div></div><div class="role-split"><div><b>Isolation Forest</b><span>“What is unusual compared with the baseline?”</span></div><div><b>DBSCAN</b><span>“Which entities sit in similar behavioral regions?”</span></div><div><b>Graph</b><span>“How are these entities actually connected?”</span></div><div><b>Ground truth</b><span>“Did our synthetic injection get detected?” — evaluation only.</span></div></div></div>
+        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>Make the detector react to behavior</h4><p>M1 gives you normal, burst, fan-out and chain scenarios. Your first useful result is not “99% accuracy”; it is being able to show that anomalous scenarios systematically receive stronger anomaly scores.</p></div><div class="panel"><div class="kicker">SHAP TIMING</div><h4>Do this after the detector works</h4><p>If SHAP becomes a blocker, ship a simpler evidence explanation first: deviation from baseline + graph evidence + feature contribution. The system must not wait for XAI perfection.</p></div></div>
+        <div class="section"><div class="section-head"><div><div class="kicker">HANDOFF</div><h4>M4 receives this stable record</h4></div></div><div class="json-card"><code>{
+  "entity_id": "W17",
+  "anomaly_score": 0.91,
+  "is_anomaly": true,
+  "cluster_id": 4,
+  "cluster_size": 17
+}</code></div></div>
+      </section>
+
+      <section class="page" data-page="m4">
+        <div class="role-hero role-amber"><div><span class="role-badge">M4 · RISK + INTEGRATION</span><h3>Make all five modules behave like one system.</h3><p>You own the boundary nobody notices until it breaks: module contracts, pipeline orchestration, risk fusion, alert formatting and end-to-end tests.</p></div><div class="role-stat"><b>Own</b><span>src/scoring/*<br>src/pipeline.py<br>integration tests</span></div></div>
+        <div class="section two-col">
+          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Think like a systems engineer</h4><ol class="learn-list"><li><b>Python modules</b><span>Functions, imports, clean interfaces.</span></li><li><b>Data contracts</b><span>Know exactly what comes in and out of M1/M2/M3.</span></li><li><b>JSON</b><span>Turn model output into a stable alert format for M5.</span></li><li><b>Testing</b><span>Write integration tests that catch broken handoffs.</span></li></ol></div>
+          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>src/scoring/risk_engine.py</code><code>src/pipeline.py</code><code>tests/test_pipeline.py</code><code>tests/test_scoring.py</code></div><div class="callout">M4 should be the first person to say “this module contract is wrong.” Catch integration bugs before the dashboard does.</div></div>
+        </div>
+        <div class="section"><div class="section-head"><div><div class="kicker">RISK FUSION</div><h4>Signals become a ranked investigative lead</h4></div></div><div class="fusion-row"><div><span>ANOMALY</span><b>40%</b><small>starting weight</small></div><span class="plus">+</span><div><span>GRAPH</span><b>20%</b><small>starting weight</small></div><span class="plus">+</span><div><span>NETWORK</span><b>20%</b><small>starting weight</small></div><span class="plus">+</span><div><span>CLUSTER</span><b>20%</b><small>starting weight</small></div><span class="equals">=</span><div class="result"><span>RISK</span><b>0–100</b><small>ranked alert</small></div></div><p class="muted-note">These weights are configuration, not scientific truth. Compare a few settings on held-out synthetic scenarios and keep the result that behaves best.</p></div>
+        <div class="section"><div class="section-head"><div><div class="kicker">ALERT CONTRACT</div><h4>This is what M5 displays</h4></div></div><div class="json-card"><code>{
+  "entity_id": "W17",
+  "risk_score": 91,
+  "priority": "HIGH",
+  "cluster_id": 4,
+  "reasons": [
+    "High transaction velocity",
+    "Abnormal fan-out pattern",
+    "IP reused across multiple entities"
+  ]
+}</code></div></div>
+        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>One command should run the backend</h4><pre><code>python -m src.pipeline data/sample.csv</code></pre><p>Result: a machine-readable alert artifact that the dashboard can consume without manually invoking five different modules.</p></div><div class="panel"><div class="kicker">YOUR BIGGEST JOB</div><h4>Protect the critical path</h4><p>Don't let GeoIP, Docker, SHAP, HDBSCAN or advanced graph metrics block the basic flow. Ship the smallest integrated system first.</p></div></div>
+      </section>
+
+      <section class="page" data-page="m5">
+        <div class="role-hero role-pink"><div><span class="role-badge">M5 · DASHBOARD + OFFLINE</span><h3>Make the system usable — and prove it works with the internet off.</h3><p>Own the investigator experience plus local assets and deployment scripts. The judges should understand the value by clicking three things.</p></div><div class="role-stat"><b>Own</b><span>dashboard/*<br>docker/*<br>scripts/*</span></div></div>
+        <div class="section two-col">
+          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Streamlit → PyVis → offline</h4><ol class="learn-list"><li><b>Streamlit</b><span>title, metrics, dataframe, button, selectbox, columns, state.</span></li><li><b>PyVis</b><span>Nodes, edges, grouping, labels, local resources.</span></li><li><b>Investigation UX</b><span>Overview → Ranked Alerts → Entity Detail.</span></li><li><b>Offline packaging</b><span>Local wheels, local assets, localhost, optional Docker image.</span></li></ol></div>
+          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>dashboard/app.py</code><code>dashboard/graph_view.py</code><code>docker/build_offline.sh</code><code>docker/Dockerfile</code><code>scripts/test_offline.sh</code></div><div class="callout">No CDN-hosted JS. No runtime API. No runtime pip install. The app must survive a physically disconnected network.</div></div>
+        </div>
+        <div class="section"><div class="section-head"><div><div class="kicker">JUDGE FLOW</div><h4>Build these three screens first</h4></div></div><div class="screen-flow"><div><span>01</span><b>Overview</b><p>Transactions · wallets · IPs · total alerts · high-priority alerts</p></div><i>→</i><div><span>02</span><b>Ranked Alerts</b><p>Entity · risk · cluster · reason · priority</p></div><i>→</i><div><span>03</span><b>Investigation</b><p>Graph · timeline · network context · evidence</p></div></div></div>
+        <div class="section"><div class="section-head"><div><div class="kicker">OFFLINE CHECK</div><h4>The demo that earns the “offline” claim</h4></div></div><div class="offline-check"><div class="check"><span>✓</span> Start locally</div><div class="check"><span>✓</span> Upload dataset</div><div class="check"><span>✓</span> Run ML</div><div class="check"><span>✓</span> Render graph</div><div class="check"><span>✓</span> Show explanations</div><div class="check"><span>✓</span> Disable network</div><div class="check"><span>✓</span> Repeat the flow</div></div></div>
+      </section>
+
+      <section class="page" data-page="m6">
+        <div class="role-hero role-slate"><div><span class="role-badge">M6 · QA + DOCS + DEMO</span><h3>Your job is to make the team's work understandable, testable and demo-ready.</h3><p>This is a deliberate non-coding role. You own the evidence package so technical members can stay on the critical path.</p></div><div class="role-stat"><b>Own</b><span>docs/*<br>QA matrix<br>demo script</span></div></div>
+        <div class="section two-col">
+          <div class="panel"><div class="kicker">LEARN FIRST</div><h4>Understand the project, not its internals</h4><ol class="learn-list"><li><b>Know the pipeline</b><span>Data → graph → ML → risk → dashboard.</span></li><li><b>Know the vocabulary</b><span>Anomaly, cluster, fan-in, fan-out, burst, evidence path.</span></li><li><b>Know the UI</b><span>Be able to guide a judge through one complete investigation.</span></li><li><b>Know the claims</b><span>Never say “criminal” or “proven laundering”; say “anomalous” / “investigative lead.”</span></li></ol></div>
+          <div class="panel"><div class="kicker">DELIVERABLES</div><h4>Own these artifacts</h4><div class="file-tree"><code>docs/QA_CHECKLIST.md</code><code>docs/SCENARIOS.md</code><code>docs/JUDGE_QA.md</code><code>docs/demo-script.md</code><code>screenshots/*</code></div><div class="callout">Your evidence should answer: what was injected, what was detected, what score was produced, and why.</div></div>
+        </div>
+        <div class="section"><div class="section-head"><div><div class="kicker">QA MATRIX</div><h4>Test by scenario, not just by button</h4></div></div><div class="qa-grid"><div><b>NORMAL</b><span>Should stay low-risk.</span></div><div><b>BURST</b><span>Should show elevated temporal signals.</span></div><div><b>FAN-OUT</b><span>Should show high out-degree / counterparties.</span></div><div><b>FAN-IN</b><span>Should show high in-degree / consolidation.</span></div><div><b>CHAIN</b><span>Should expose sequential evidence.</span></div><div><b>MIXED</b><span>Should produce combined reasons.</span></div></div></div>
+        <div class="section"><div class="section-head"><div><div class="kicker">DEMO SCRIPT</div><h4>Keep the story under five minutes</h4></div></div><div class="timeline"><div><span>00:00</span><p>Problem: turn raw metadata into ranked investigative leads.</p></div><div><span>00:30</span><p>Upload synthetic dataset and run investigation.</p></div><div><span>01:20</span><p>Open highest-risk entity.</p></div><div><span>02:00</span><p>Show graph + temporal/evidence path.</p></div><div><span>02:45</span><p>Explain anomaly model and why labels are evaluation-only.</p></div><div><span>03:30</span><p>Disable internet and repeat a local run.</p></div><div><span>04:15</span><p>Close with: offline + graph + correlation + explainability.</p></div></div></div>
+        <div class="section"><div class="section-head"><div><div class="kicker">JUDGE QUESTIONS</div><h4>Know these answers cold</h4></div></div><div class="qa-list"><div><b>Why unsupervised?</b><p>Because reliable real-world labels are unavailable in the deployment setting; synthetic labels are kept for evaluation rather than training.</p></div><div><b>Does anomaly mean criminal?</b><p>No. It means the behavior deviates from the learned baseline and should be investigated.</p></div><div><b>Why a graph?</b><p>Because the core intelligence task is relational: how wallets, transactions and network observations connect.</p></div><div><b>Why not a huge neural model?</b><p>The system must run offline on CPU and explain its alerts. Simpler models make that constraint achievable and testable.</p></div></div></div>
+      </section>
+
+      <footer class="footer"><span>SIH26146 · team operating manual</span><span>Static / offline / GitHub Pages ready</span></footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
