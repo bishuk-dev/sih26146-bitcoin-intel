@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+
+# Data (raw/generated datasets can be large — don't commit them)
+data/raw/
+data/generated/
+*.csv
+*.parquet
+!data/schema/*.csv
+
+# Models
+*.pkl
+*.joblib
+
+# Offline wheels (build artifact, regenerate via docker/build_offline.sh)
+wheels/
+
+# Env / secrets
+.env
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Streamlit
+.streamlit/secrets.toml
