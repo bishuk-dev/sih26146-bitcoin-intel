@@ -37,7 +37,7 @@
           <button class="nav-item" data-tab="m1">
             <span class="nav-dot cyan"></span
             ><span
-              ><strong>M1-Bhavya · Data</strong
+              ><strong>M1-Shubham · Data</strong
               ><small>Generate + clean the data</small></span
             >
           </button>
@@ -58,7 +58,7 @@
           <button class="nav-item" data-tab="m4">
             <span class="nav-dot amber"></span
             ><span
-              ><strong>M4-Shubham · Risk</strong
+              ><strong>M4-Bhavya · Risk</strong
               ><small>Join everything together</small></span
             >
           </button>
@@ -110,17 +110,17 @@
           <div class="hero-grid">
             <div class="hero-copy">
               <span class="eyebrow">START HERE</span>
-              <h3>Before we write code, <em>understand the machine.</em></h3>
+              <h3>How this project works</h3>
               <p class="lead">
-                The team is not building a “Bitcoin AI.” We are building a small
-                investigation system that takes messy transaction + network
-                records, turns them into connected entities, finds suspicious
-                behaviour, and shows a human why an entity was ranked highly.
+                We take messy transaction and network records (like IPs and
+                wallets), connect them together, and use machine learning to
+                find suspicious patterns. Finally, we show an investigator
+                exactly <em>why</em> an entity was flagged.
               </p>
               <div class="quick-note">
-                <b>Rule for everyone:</b> you do not need to learn the whole
-                field. Learn enough theory to make your module correctly, then
-                learn by implementing it.
+                <b>Rule for everyone:</b> You don't need to learn the whole
+                field. Learn the specific parts you need to build your module,
+                then test it.
               </div>
             </div>
             <div class="hero-side">
@@ -128,7 +128,9 @@
               <div class="big-stat">
                 <b>1</b><span>QA / docs / demo owner</span>
               </div>
-              <div class="big-stat"><b>1</b><span>shared pipeline</span></div>
+              <div class="big-stat">
+                <b>1</b><span>shared offline pipeline</span>
+              </div>
             </div>
           </div>
 
@@ -141,7 +143,7 @@
             </div>
             <div class="pipeline big-pipeline">
               <div class="pipeline-node cyan">
-                <span>01</span><b>DATA</b><strong>M1-Bhavya</strong
+                <span>01</span><b>DATA</b><strong>M1-Shubham</strong
                 ><small>Read, clean, validate</small>
               </div>
               <div class="pipe-arrow">→</div>
@@ -156,7 +158,7 @@
               </div>
               <div class="pipe-arrow">→</div>
               <div class="pipeline-node amber">
-                <span>04</span><b>RISK</b><strong>M4-Shubham</strong
+                <span>04</span><b>RISK</b><strong>M4-Bhavya</strong
                 ><small>Combine evidence</small>
               </div>
               <div class="pipe-arrow">→</div>
@@ -176,67 +178,74 @@
 
           <section class="section two-col">
             <div class="panel paper">
-              <span class="kicker">02 · WHAT IS ACTUALLY UNDER THE HOOD?</span>
-              <h4>The data changes shape five times.</h4>
+              <span class="kicker">02 · HOW THE DATA CHANGES</span>
+              <h4>From CSV to alerts</h4>
               <div class="underhood">
                 <div>
-                  <b>Raw rows</b
+                  <b>1. Raw Rows</b
+                  ><span>M1 loads CSVs of transactions and network logs.</span>
+                </div>
+                <div>
+                  <b>2. Clean Tables</b
                   ><span
-                    >A transaction is just a record: timestamp, TXID, wallets,
-                    amounts, fee, IP and ports.</span
+                    >M1 cleans missing values, fixes types, and generates our
+                    dataset.</span
                   >
                 </div>
                 <div>
-                  <b>Clean tables</b
+                  <b>3. Graph</b
                   ><span
-                    >M1-Bhavya fixes missing values, types, duplicates and bad
-                    records.</span
+                    >M2 turns those rows into connected dots (nodes and edges)
+                    using
+                    <span class="tech-term" data-term="cio">CIO</span>.</span
                   >
                 </div>
                 <div>
-                  <b>Graph</b
+                  <b>4. Features</b
                   ><span
-                    >M2-Arjun turns records into nodes and edges so
-                    relationships become queryable.</span
+                    >M2 measures behavior for each wallet (e.g.,
+                    <span class="tech-term" data-term="degree">Degree</span>,
+                    <span class="tech-term" data-term="burstiness"
+                      >Burstiness</span
+                    >).</span
                   >
                 </div>
                 <div>
-                  <b>Feature table</b
+                  <b>5. Alerts</b
                   ><span
-                    >M2-Arjun measures behaviour: transaction count, degree,
-                    burstiness, IP reuse, counterparties, etc.</span
-                  >
-                </div>
-                <div>
-                  <b>Model output</b
-                  ><span
-                    >M3-Bishu turns those measurements into suspiciousness
-                    signals; M4-Shubham turns signals into ranked alerts.</span
+                    >M3 runs models to score suspiciousness, and M4 ranks them
+                    into alerts for M5's dashboard.</span
                   >
                 </div>
               </div>
             </div>
             <div class="panel dark-paper">
-              <span class="kicker">03 · THE CORE IDEA</span>
-              <h4>Three questions, three tools.</h4>
+              <span class="kicker">03 · THREE TOOLS, THREE QUESTIONS</span>
+              <h4>The core approach</h4>
               <div class="question-stack">
                 <div>
-                  <b>“Does this look suspicious?”</b
+                  <b>“Does this match known suspicious patterns?”</b
                   ><span
-                    >XGBoost learns from our synthetic training labels.</span
+                    ><span class="tech-term" data-term="xgboost">XGBoost</span>
+                    learns from our synthetic training data.</span
                   >
                 </div>
                 <div>
-                  <b>“Does this look strange?”</b
+                  <b>“Is this statistically unusual?”</b
                   ><span
-                    >Isolation Forest gives an independent anomaly signal.</span
+                    ><span class="tech-term" data-term="isolation-forest"
+                      >Isolation Forest</span
+                    >
+                    provides a secondary anomaly signal without needing
+                    labels.</span
                   >
                 </div>
                 <div>
-                  <b>“What is connected to it?”</b
+                  <b>“Who is connected to them?”</b
                   ><span
-                    >The graph shows the transaction and network evidence around
-                    the entity.</span
+                    >The graph and
+                    <span class="tech-term" data-term="dbscan">DBSCAN</span>
+                    show the network context around the entity.</span
                   >
                 </div>
               </div>
@@ -247,55 +256,59 @@
             <div class="section-head">
               <div>
                 <span class="kicker">04 · ML DECISION</span>
-                <h4>
-                  Why the current plan is XGBoost first, Isolation Forest second
-                </h4>
+                <h4>Our Machine Learning Stack</h4>
               </div>
               <span class="section-chip green-chip">official team plan</span>
             </div>
             <div class="decision-grid">
               <div class="decision-card primary">
                 <span class="decision-label">PRIMARY</span>
-                <h5>XGBoost</h5>
+                <h5>
+                  <span class="tech-term" data-term="xgboost">XGBoost</span>
+                </h5>
                 <p>
-                  Supervised model. We can train it because our synthetic
-                  generator provides ground-truth labels. It is also the easiest
-                  route to SHAP explanations.
+                  A supervised model. We train it on synthetic ground-truth
+                  labels. It's fast, CPU-friendly, and works well with
+                  <span class="tech-term" data-term="shap">SHAP</span>
+                  explanations.
                 </p>
-                <div class="decision-arrow">features → class probability</div>
               </div>
               <div class="decision-card secondary">
                 <span class="decision-label">SECONDARY</span>
-                <h5>Isolation Forest</h5>
+                <h5>
+                  <span class="tech-term" data-term="isolation-forest"
+                    >Isolation Forest</span
+                  >
+                </h5>
                 <p>
-                  Unsupervised check. It asks whether behaviour is unusual
-                  compared with the wider population. It does not prove
-                  wrongdoing.
+                  An unsupervised model. It checks if behavior is statistically
+                  unusual compared to everyone else.
                 </p>
-                <div class="decision-arrow">features → anomaly score</div>
               </div>
               <div class="decision-card support">
                 <span class="decision-label">SUPPORTING</span>
-                <h5>Clustering + graph</h5>
+                <h5>
+                  <span class="tech-term" data-term="dbscan">DBSCAN</span> +
+                  Graph
+                </h5>
                 <p>
-                  Groups similar entities and gives investigators the
-                  surrounding structure needed to inspect the alert.
+                  Groups similar entities (clustering) to give investigators
+                  context about the neighborhood around an alert.
                 </p>
-                <div class="decision-arrow">features / edges → context</div>
               </div>
             </div>
             <p class="small-note">
-              Important: the synthetic label is allowed into XGBoost training,
-              but never as a feature. For evaluation, create separate train /
-              validation / test scenarios so the model is not simply memorising
-              the generator.
+              <strong>Note:</strong> We use synthetic labels to
+              <em>train</em> XGBoost, but we NEVER pass the label as a feature.
+              We evaluate on different scenarios to ensure the model actually
+              learned patterns, not just memorized numbers.
             </p>
           </section>
 
           <section class="section two-col">
             <div class="panel">
               <span class="kicker">05 · GRAPH THEORY, IN PLAIN ENGLISH</span>
-              <h4>What M2-Arjun is doing for the rest of us</h4>
+              <h4>What M2 does for the rest of us</h4>
               <p>
                 A graph is just a way to store <b>things</b> and the
                 <b>relationships between them</b>.
@@ -308,9 +321,9 @@
                 <div class="g-node wallet">W-17</div>
               </div>
               <p class="muted">
-                The useful part is that we can ask questions such as “what is
-                two or three hops away from this wallet?” instead of staring at
-                unrelated rows in a CSV.
+                This lets us ask questions like “what is two or three hops away
+                from this wallet?” instead of staring at unrelated rows in a
+                CSV.
               </p>
             </div>
             <div class="panel">
@@ -321,8 +334,8 @@
                 investigative lead.”
               </div>
               <p>
-                Keep this language in the UI, README and presentation. A high
-                risk score is a prioritisation signal, not a legal conclusion.
+                Keep this language everywhere. A high risk score is a
+                prioritisation signal, not a legal conclusion.
               </p>
             </div>
           </section>
@@ -339,7 +352,8 @@
                 <b>From → To</b><b>What is handed over</b><b>Meaning</b>
               </div>
               <div class="contract-row">
-                <b>M1-Bhavya → M2-Arjun</b><code>blockchain_df, network_df</code
+                <b>M1-Shubham → M2-Arjun</b
+                ><code>blockchain_df, network_df</code
                 ><span>validated source tables</span>
               </div>
               <div class="contract-row">
@@ -347,13 +361,13 @@
                 ><span>graph + one feature row per entity</span>
               </div>
               <div class="contract-row">
-                <b>M3-Bishu → M4-Shubham</b
+                <b>M3-Bishu → M4-Bhavya</b
                 ><code
                   >entity_id, class_probability, anomaly_score, cluster_id</code
                 ><span>ML signals</span>
               </div>
               <div class="contract-row">
-                <b>M4-Shubham → M5-Harsh</b
+                <b>M4-Bhavya → M5-Harsh</b
                 ><code>alerts.json + investigation graph</code
                 ><span>stable data the dashboard can display</span>
               </div>
@@ -363,7 +377,7 @@
           <section class="section">
             <div class="section-head">
               <div>
-                <span class="kicker">08 · HOW WE SHOULD BUILD IT</span>
+                <span class="kicker">07 · HOW WE BUILD IT</span>
                 <h4>Do this in order. Do not jump ahead.</h4>
               </div>
             </div>
@@ -373,7 +387,7 @@
                 <div>
                   <b>Data works</b>
                   <p>100-row CSV can be loaded and validated.</p>
-                  <small>M1-Bhavya</small>
+                  <small>M1-Shubham</small>
                 </div>
               </div>
               <div class="gate">
@@ -397,7 +411,7 @@
                 <div>
                   <b>Risk works</b>
                   <p>One command returns ranked alerts with reasons.</p>
-                  <small>M4-Shubham</small>
+                  <small>M4-Bhavya</small>
                 </div>
               </div>
               <div class="gate">
@@ -420,31 +434,28 @@
               <h4>These are later, not now</h4>
               <ul class="plain-list">
                 <li>GraphSAGE / GAT</li>
-                <li>Fancy deep learning</li>
-                <li>GeoIP before the core pipeline works</li>
-                <li>Millions of rows before a 100-row end-to-end test works</li>
+                <li>Fancy deep learning or LLMs</li>
+                <li>Millions of rows before a 100-row test works</li>
                 <li>Login, settings, profiles, notifications</li>
-                <li>Docker before local Python works</li>
               </ul>
             </div>
             <div class="panel success-panel">
               <span class="kicker">THE TEAM RULE</span>
-              <h4>Every finished task must leave evidence.</h4>
+              <h4>Every task must leave evidence.</h4>
               <ol class="plain-list numbered">
                 <li>Code committed on your branch.</li>
-                <li>A tiny test or sample proving it works.</li>
-                <li>A note saying what your output looks like.</li>
-                <li>A clear hand-off to the next member.</li>
+                <li>A tiny test proving it works.</li>
+                <li>A clear hand-off format for the next member.</li>
               </ol>
             </div>
           </section>
         </section>
 
-        <!-- ========================= M1-Bhavya ========================= -->
+        <!-- ========================= M1-Shubham ========================= -->
         <section class="page" data-page="m1">
           <div class="role-hero role-cyan">
             <div>
-              <span class="role-badge">M1-Bhavya · DATA ENGINEER</span>
+              <span class="role-badge">M1-Shubham · DATA ENGINEER</span>
               <h3>
                 Your job: make believable data and make bad input fail early.
               </h3>
@@ -465,28 +476,32 @@
               <ol class="step-list">
                 <li>
                   <b>pandas</b
+                  ><span>DataFrame, `read_csv`, `groupby`, `merge`.</span>
+                </li>
+                <li>
+                  <b>Data Validation</b
                   ><span
-                    >DataFrame, read_csv, read_json, filtering, groupby, merge,
-                    dtypes.</span
+                    >Find missing fields, duplicate rows, bad timestamps.</span
                   >
                 </li>
                 <li>
-                  <b>Validation</b
+                  <b>Synthetic Generation</b
                   ><span
-                    >Missing fields, duplicate rows, invalid timestamps, IP
-                    validation, numeric ranges.</span
+                    >Use NumPy/Faker to generate realistic normal traffic.</span
                   >
                 </li>
                 <li>
-                  <b>Random data generation</b
+                  <b>Scenario Injection</b
                   ><span
-                    >NumPy random generator + Faker for IPs and
-                    identifiers.</span
+                    >Generate
+                    <span class="tech-term" data-term="burstiness"
+                      >Burstiness</span
+                    >,
+                    <span class="tech-term" data-term="fan-out">Fan-Out</span>,
+                    and
+                    <span class="tech-term" data-term="fan-in">Fan-In</span>
+                    scenarios.</span
                   >
-                </li>
-                <li>
-                  <b>Scenario thinking</b
-                  ><span>Normal, burst, fan-out, fan-in, chain, mixed.</span>
                 </li>
               </ol>
             </div>
@@ -509,138 +524,53 @@
           <section class="section">
             <div class="section-head">
               <div>
-                <span class="kicker">BUILD ORDER</span>
-                <h4>Do these steps in this exact order</h4>
+                <span class="kicker">BUILD CHECKLIST</span>
+                <h4>Do this in order</h4>
               </div>
             </div>
-            <div class="action-list">
-              <div class="action">
-                <span>01</span>
-                <div>
-                  <h5>Create the 100-row sample</h5>
-                  <p>
-                    Make the smallest hand-checkable dataset first. Include at
-                    least one of every important field.
-                  </p>
-                  <pre>
-data/sample/blockchain.csv
-data/sample/network.csv</pre
-                  >
-                </div>
-              </div>
-              <div class="action">
-                <span>02</span>
-                <div>
-                  <h5>Write the schema check</h5>
-                  <p>
-                    Reject files with missing required columns. Convert
-                    timestamps and numeric columns to fixed types.
-                  </p>
-                  <pre>
-required = ["timestamp", "txid", "input_wallet", "output_wallet", "amount", "fee", "script_type"]</pre
-                  >
-                </div>
-              </div>
-              <div class="action">
-                <span>03</span>
-                <div>
-                  <h5>Generate normal behaviour</h5>
-                  <p>
-                    Create realistic wallet activity first. It should have a
-                    mixture of small and medium transfers, repeated
-                    counterparties, and ordinary timing.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>04</span>
-                <div>
-                  <h5>Add controlled anomalies</h5>
-                  <p>
-                    Implement burst, fan-out, fan-in, chain and mixed scenarios.
-                    Keep a hidden <code>ground_truth_anomalous</code> and
-                    <code>scenario_type</code> column for evaluation.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>05</span>
-                <div>
-                  <h5>Make train/validation/test generators different</h5>
-                  <p>
-                    Change ranges and scenario mixtures so the model cannot
-                    simply memorise one magic number.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>06</span>
-                <div>
-                  <h5>Write failure tests</h5>
-                  <p>
-                    Test empty file, missing column, duplicate TX, bad IP,
-                    negative amount and bad timestamp.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <ul class="check-list">
+              <li>
+                Create a simple 100-row sample dataset by hand to test the
+                pipeline.
+              </li>
+              <li>
+                Write a schema validator to reject bad CSVs (e.g., negative
+                amounts).
+              </li>
+              <li>Write the synthetic generator for "Normal" behavior.</li>
+              <li>
+                Write the generator for Anomalous behaviors (<span
+                  class="tech-term"
+                  data-term="fan-out"
+                  >Fan-out</span
+                >,
+                <span class="tech-term" data-term="burstiness">Burstiness</span
+                >).
+              </li>
+              <li>
+                Ensure the ground-truth label is generated but kept completely
+                separate from the features we hand to the ML model.
+              </li>
+            </ul>
           </section>
 
           <section class="section two-col">
             <div class="panel">
-              <span class="kicker">HAND OFF TO M2-Arjun</span>
-              <h4>What M2-Arjun should receive</h4>
+              <span class="kicker">HAND OFF TO M2</span>
+              <h4>Output required</h4>
               <div class="code-card">
                 <code>blockchain_df</code><code>network_df</code>
               </div>
-              <p>
-                Same column names every time. M2-Arjun should not need to know
-                which file format you parsed.
-              </p>
+              <p>M2 must be able to use your output without manual fixing.</p>
             </div>
             <div class="panel">
-              <span class="kicker">DONE WHEN</span>
-              <h4>You are actually finished when…</h4>
-              <ul class="check-list">
-                <li>100-row sample loads.</li>
-                <li>Bad files fail with useful messages.</li>
-                <li>Generator can produce all six scenarios.</li>
-                <li>
-                  Ground truth exists but is not mixed into normal features.
-                </li>
-                <li>
-                  M2-Arjun can use your output without editing it manually.
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <section class="section">
-            <div class="section-head">
-              <div>
-                <span class="kicker">COMMON MISTAKES</span>
-                <h4>Watch these</h4>
-              </div>
-            </div>
-            <div class="mistake-grid">
-              <div>
-                <b>Random = realistic?</b>
-                <p>
-                  No. Behaviour is the point. Random rows without relationships
-                  are useless for this project.
-                </p>
-              </div>
-              <div>
-                <b>Labels are public?</b>
-                <p>
-                  No. Keep them in the evaluation data path, not in the ML
-                  feature set.
-                </p>
-              </div>
-              <div>
-                <b>Huge data first?</b>
-                <p>No. Get 100 rows working, then 10k, then 100k.</p>
-              </div>
+              <span class="kicker">WATCH OUT FOR</span>
+              <h4>Don't cheat</h4>
+              <p>
+                Do not generate training and testing datasets using the exact
+                same random seeds or ranges, otherwise our ML model is just
+                memorizing the generator instead of learning patterns.
+              </p>
             </div>
           </section>
         </section>
@@ -667,32 +597,30 @@ required = ["timestamp", "txid", "input_wallet", "output_wallet", "amount", "fee
               <span class="kicker">LEARN FIRST</span>
               <h4>The small set of graph ideas you need</h4>
               <ol class="step-list">
-                <li><b>Node</b><span>A thing: wallet, TX, IP, ASN.</span></li>
+                <li><b>Node</b><span>A thing: wallet, TX, IP.</span></li>
                 <li>
                   <b>Edge</b
+                  ><span>A relationship: INPUT, OUTPUT, OBSERVED.</span>
+                </li>
+                <li>
+                  <b><span class="tech-term" data-term="degree">Degree</span></b
+                  ><span>How many connections a node has (In/Out).</span>
+                </li>
+                <li>
+                  <b
+                    ><span class="tech-term" data-term="pagerank"
+                      >PageRank</span
+                    ></b
+                  ><span>Measures entity importance in the graph.</span>
+                </li>
+                <li>
+                  <b
+                    >Entity clustering (<span class="tech-term" data-term="cio"
+                      >CIO</span
+                    >)</b
                   ><span
-                    >A relationship: INPUT, OUTPUT, OBSERVED, SENDS_TO.</span
-                  >
-                </li>
-                <li>
-                  <b>Directed graph</b
-                  ><span>Direction matters for money flow.</span>
-                </li>
-                <li>
-                  <b>Degree</b
-                  ><span
-                    >How many incoming/outgoing relationships a node has.</span
-                  >
-                </li>
-                <li>
-                  <b>Path / hop</b
-                  ><span>How far one entity is from another.</span>
-                </li>
-                <li>
-                  <b>Entity clustering</b
-                  ><span
-                    >When multiple wallet addresses may belong to one
-                    actor.</span
+                    >Grouping multiple wallet addresses that likely belong to
+                    one actor.</span
                   >
                 </li>
               </ol>
@@ -715,77 +643,42 @@ required = ["timestamp", "txid", "input_wallet", "output_wallet", "amount", "fee
           <section class="section">
             <div class="section-head">
               <div>
-                <span class="kicker">BUILD ORDER</span>
-                <h4>Build the graph in layers</h4>
+                <span class="kicker">BUILD CHECKLIST</span>
+                <h4>Do this in order</h4>
               </div>
             </div>
-            <div class="action-list">
-              <div class="action">
-                <span>01</span>
-                <div>
-                  <h5>Build the transaction-only graph</h5>
-                  <p>
-                    Start with wallet → TX → wallet. Confirm amounts and
-                    timestamps are stored on edges.
-                  </p>
-                  <pre>W01 --INPUT--> TX01 --OUTPUT--> W02</pre>
-                </div>
-              </div>
-              <div class="action">
-                <span>02</span>
-                <div>
-                  <h5>Add network observations</h5>
-                  <p>
-                    Connect IP → TX when the source timestamp falls within the
-                    agreed observation rule from the PS/synthetic generator.
-                  </p>
-                  <pre>IP01 --OBSERVED--> TX01</pre>
-                </div>
-              </div>
-              <div class="action">
-                <span>03</span>
-                <div>
-                  <h5>Add entity clustering</h5>
-                  <p>
-                    Implement Common Input Ownership as a heuristic. Keep the
-                    method and confidence; do not present the cluster as
-                    absolute truth.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>04</span>
-                <div>
-                  <h5>Compute graph features</h5>
-                  <p>
-                    At minimum: in-degree, out-degree, total degree, unique
-                    counterparties, PageRank, clustering coefficient and cluster
-                    size.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>05</span>
-                <div>
-                  <h5>Add behavioural graph features</h5>
-                  <p>
-                    Fan-in/out, merge/split ratios, path length and simple
-                    peeling-chain length. Avoid expensive centralities until the
-                    basic pipeline is fast.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>06</span>
-                <div>
-                  <h5>Save a small investigation subgraph</h5>
-                  <p>
-                    Given an entity ID, return its 2–3 hop neighbourhood.
-                    M5-Harsh will use this later for the evidence view.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <ul class="check-list">
+              <li>
+                Build the base transaction graph (Wallet → TX → Wallet) using
+                NetworkX.
+              </li>
+              <li>Add network observations (IP → TX).</li>
+              <li>
+                Implement
+                <span class="tech-term" data-term="cio">CIO</span> clustering to
+                group wallets.
+              </li>
+              <li>
+                Compute standard graph features (<span
+                  class="tech-term"
+                  data-term="degree"
+                  >Degree</span
+                >, <span class="tech-term" data-term="pagerank">PageRank</span>,
+                Unique Counterparties).
+              </li>
+              <li>
+                Compute behavioral features (<span
+                  class="tech-term"
+                  data-term="fan-in"
+                  >Fan-in</span
+                >, <span class="tech-term" data-term="fan-out">Fan-out</span>,
+                Peeling).
+              </li>
+              <li>
+                Write a function to extract a small 2-hop sub-graph around a
+                specific entity (for the UI).
+              </li>
+            </ul>
           </section>
 
           <section class="section two-col">
@@ -805,8 +698,16 @@ required = ["timestamp", "txid", "input_wallet", "output_wallet", "amount", "fee
               <span class="kicker">DONE WHEN</span>
               <h4>Prove these three things</h4>
               <ul class="check-list">
-                <li>A fan-out wallet has high out-degree.</li>
-                <li>A fan-in wallet has high in-degree.</li>
+                <li>
+                  A
+                  <span class="tech-term" data-term="fan-out">fan-out</span>
+                  wallet has high out-degree.
+                </li>
+                <li>
+                  A
+                  <span class="tech-term" data-term="fan-in">fan-in</span>
+                  wallet has high in-degree.
+                </li>
                 <li>Clicking an entity returns a sensible local subgraph.</li>
               </ul>
             </div>
@@ -840,37 +741,27 @@ required = ["timestamp", "txid", "input_wallet", "output_wallet", "amount", "fee
               <ol class="step-list">
                 <li>
                   <b>Feature</b
-                  ><span
-                    >A measurable property such as degree, burstiness or
-                    transaction count.</span
-                  >
+                  ><span>A measurable property like degree or burstiness.</span>
                 </li>
                 <li><b>Sample</b><span>One entity / wallet row.</span></li>
                 <li>
-                  <b>Classification</b
-                  ><span
-                    >Learn from labelled examples: benign vs anomalous.</span
-                  >
-                </li>
-                <li>
                   <b>Overfitting</b
                   ><span
-                    >Model memorises the training examples instead of learning a
-                    useful pattern.</span
+                    >Model memorizes the training data instead of learning
+                    patterns.</span
                   >
                 </li>
                 <li>
                   <b>Leakage</b
                   ><span
-                    >Information from the answer sneaks into the features or
-                    test process.</span
+                    >When the answer (ground truth) sneaks into the
+                    features.</span
                   >
                 </li>
                 <li>
-                  <b>Precision / recall / F1</b
+                  <b>Precision & Recall</b
                   ><span
-                    >Measure whether alerts are useful, not merely
-                    numerous.</span
+                    >Metrics to measure if our alerts are actually useful.</span
                   >
                 </li>
               </ol>
@@ -893,106 +784,48 @@ required = ["timestamp", "txid", "input_wallet", "output_wallet", "amount", "fee
           <section class="section">
             <div class="section-head">
               <div>
-                <span class="kicker">YOUR BUILD ORDER</span>
+                <span class="kicker">BUILD CHECKLIST</span>
                 <h4>Follow this order</h4>
               </div>
             </div>
-            <div class="action-list">
-              <div class="action">
-                <span>01</span>
-                <div>
-                  <h5>Build a toy classifier</h5>
-                  <p>
-                    Create 100–500 synthetic feature rows and train XGBoost on
-                    two classes. Do this before touching the Bitcoin pipeline.
-                  </p>
-                  <pre>X → XGBoost → probability → prediction</pre>
-                </div>
-              </div>
-              <div class="action">
-                <span>02</span>
-                <div>
-                  <h5>Create the feature list</h5>
-                  <p>
-                    Agree with M2-Arjun on the numerical feature columns.
-                    Example: transaction_count, total_inflow, counterparties,
-                    burstiness, degree, pagerank, IP_count.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>03</span>
-                <div>
-                  <h5>Make three dataset versions</h5>
-                  <p>
-                    Training, validation and test must come from different
-                    random seeds and preferably different behaviour ranges. This
-                    is how you defend yourself against the “you trained on your
-                    own generator” question.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>04</span>
-                <div>
-                  <h5>Train XGBoost</h5>
-                  <p>
-                    Start with a small CPU-friendly model. Save the feature list
-                    and the trained model. Do not tune ten parameters at once.
-                  </p>
-                  <pre>
-model.fit(X_train, y_train)
-prob = model.predict_proba(X_test)[:, 1]</pre
-                  >
-                </div>
-              </div>
-              <div class="action">
-                <span>05</span>
-                <div>
-                  <h5>Measure the model</h5>
-                  <p>
-                    Report precision, recall, F1 and PR-AUC. Also record false
-                    positives. If the model catches every anomaly by flagging
-                    everything, that is not a success.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>06</span>
-                <div>
-                  <h5>Add SHAP</h5>
-                  <p>
-                    Once the model is stable, use TreeExplainer to show the top
-                    features pushing a prediction higher or lower.
-                  </p>
-                  <pre>
-explainer = shap.TreeExplainer(model)
-values = explainer.shap_values(X_one)</pre
-                  >
-                </div>
-              </div>
-              <div class="action">
-                <span>07</span>
-                <div>
-                  <h5>Add Isolation Forest</h5>
-                  <p>
-                    Train it on the same behavioural features without labels.
-                    Store its anomaly score separately. Do not pretend the score
-                    is a probability of crime.
-                  </p>
-                </div>
-              </div>
-              <div class="action">
-                <span>08</span>
-                <div>
-                  <h5>Hand both signals to M4-Shubham</h5>
-                  <p>
-                    Return class probability, anomaly score, cluster ID and top
-                    explanation features.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <ul class="check-list">
+              <li>
+                Build a toy classifier on 100 rows to ensure the code runs.
+              </li>
+              <li>
+                Agree with M2 on the feature list (e.g. `transaction_count`,
+                `burstiness`, `pagerank`).
+              </li>
+              <li>
+                Ensure Train, Validation, and Test sets use completely different
+                seeds/ranges.
+              </li>
+              <li>
+                Train the
+                <span class="tech-term" data-term="xgboost">XGBoost</span>
+                primary model.
+              </li>
+              <li>
+                Measure F1, Precision, and Recall. Don't just show accuracy!
+              </li>
+              <li>
+                Integrate
+                <span class="tech-term" data-term="shap">SHAP</span> to generate
+                explanations for the top predictions.
+              </li>
+              <li>
+                Train the
+                <span class="tech-term" data-term="isolation-forest"
+                  >Isolation Forest</span
+                >
+                model on the same features (without labels) for a secondary
+                anomaly score.
+              </li>
+              <li>
+                Hand off `class_probability`, `anomaly_score`, `cluster_id`, and
+                `top_features` to M4.
+              </li>
+            </ul>
           </section>
 
           <section class="section">
@@ -1029,7 +862,7 @@ values = explainer.shap_values(X_one)</pre
               </div>
               <div class="pipe-arrow">→</div>
               <div class="model-step">
-                <span>→</span><b>M4-Shubham</b
+                <span>→</span><b>M4-Bhavya</b
                 ><small>combine signals into risk</small>
               </div>
             </div>
@@ -1099,7 +932,7 @@ values = explainer.shap_values(X_one)</pre
               <div>
                 <b>Handoff</b
                 ><span
-                  >M4-Shubham can consume one JSON row without reading your
+                  >M4-Bhavya can consume one JSON row without reading your
                   training code.</span
                 >
               </div>
@@ -1107,11 +940,11 @@ values = explainer.shap_values(X_one)</pre
           </section>
         </section>
 
-        <!-- ========================= M4-Shubham ========================= -->
+        <!-- ========================= M4-Bhavya ========================= -->
         <section class="page" data-page="m4">
           <div class="role-hero role-amber">
             <div>
-              <span class="role-badge">M4-Shubham · RISK + INTEGRATION</span>
+              <span class="role-badge">M4-Bhavya · RISK + INTEGRATION</span>
               <h3>
                 Your job: make five separate modules behave like one
                 application.
@@ -1326,27 +1159,24 @@ values = explainer.shap_values(X_one)</pre
           <section class="section">
             <div class="section-head">
               <div>
-                <span class="kicker">BUILD ORDER</span>
-                <h4>Build only these screens first</h4>
+                <span class="kicker">BUILD CHECKLIST</span>
+                <h4>Build only these screens</h4>
               </div>
             </div>
             <div class="screen-flow">
               <div>
                 <span>01</span><b>Overview</b>
-                <p>
-                  Transactions · wallets · IPs · total alerts · high-risk
-                  alerts.
-                </p>
+                <p>High-level stats: total alerts, high-risk alerts.</p>
               </div>
               <i>→</i>
               <div>
                 <span>02</span><b>Ranked Alerts</b>
-                <p>Sort by risk. Let the user choose an alert.</p>
+                <p>List of alerts sorted by risk. Click to investigate.</p>
               </div>
               <i>→</i>
               <div>
                 <span>03</span><b>Investigation</b>
-                <p>Graph + reasons + timeline + network context.</p>
+                <p>Detailed view: Subgraph, reasons, timeline.</p>
               </div>
             </div>
           </section>
@@ -1445,28 +1275,28 @@ values = explainer.shap_values(X_one)</pre
               <h4>Understand the system from the outside.</h4>
               <ol class="step-list">
                 <li>
-                  <b>Pipeline</b
-                  ><span>Data → graph → ML → risk → dashboard.</span>
-                </li>
-                <li>
                   <b>Vocabulary</b
                   ><span
-                    >fan-in, fan-out, burst, anomaly, cluster, evidence
-                    path.</span
+                    >Know terms like
+                    <span class="tech-term" data-term="fan-in">fan-in</span>,
+                    <span class="tech-term" data-term="fan-out">fan-out</span>,
+                    <span class="tech-term" data-term="burstiness"
+                      >burstiness</span
+                    >, and anomaly.</span
                   >
                 </li>
                 <li>
                   <b>Claims</b
                   ><span
-                    >Know the difference between “anomalous” and
-                    “criminal”.</span
+                    >Never say "criminal" when we mean "investigative
+                    lead."</span
                   >
                 </li>
                 <li>
-                  <b>Demo flow</b
+                  <b>Demo Flow</b
                   ><span
-                    >Be able to guide a judge through one complete
-                    investigation.</span
+                    >Be ready to guide a judge through a 5-minute offline
+                    demo.</span
                   >
                 </li>
               </ol>
@@ -1486,26 +1316,21 @@ values = explainer.shap_values(X_one)</pre
             <div class="section-head">
               <div>
                 <span class="kicker">TEST THE BEHAVIOUR</span>
-                <h4>For each scenario, write down what should happen.</h4>
+                <h4>What should happen?</h4>
               </div>
             </div>
             <div class="qa-grid">
-              <div><b>NORMAL</b><span>Should stay mostly low-risk.</span></div>
-              <div><b>BURST</b><span>Temporal features should rise.</span></div>
+              <div><b>NORMAL</b><span>Low risk score.</span></div>
+              <div><b>BURST</b><span>Temporal features spike.</span></div>
               <div>
-                <b>FAN-OUT</b
-                ><span>Out-degree / counterparties should rise.</span>
+                <b><span class="tech-term" data-term="fan-out">FAN-OUT</span></b
+                ><span>Out-degree spikes.</span>
               </div>
               <div>
-                <b>FAN-IN</b><span>In-degree / consolidation should rise.</span>
+                <b><span class="tech-term" data-term="fan-in">FAN-IN</span></b
+                ><span>In-degree spikes.</span>
               </div>
-              <div>
-                <b>CHAIN</b><span>Sequential path should be visible.</span>
-              </div>
-              <div>
-                <b>MIXED</b
-                ><span>Multiple evidence reasons should appear.</span>
-              </div>
+              <div><b>MIXED</b><span>Multiple reasons triggered.</span></div>
             </div>
           </section>
 
@@ -1564,40 +1389,48 @@ values = explainer.shap_values(X_one)</pre
             </div>
             <div class="qa-list">
               <div>
-                <b>Why XGBoost?</b>
+                <b
+                  >Why
+                  <span class="tech-term" data-term="xgboost">XGBoost</span>?</b
+                >
                 <p>
-                  It is a strong CPU-friendly choice for our engineered tabular
-                  graph/temporal features and gives us a straightforward SHAP
-                  path.
+                  It's CPU-friendly, handles structured features well, and gives
+                  straightforward
+                  <span class="tech-term" data-term="shap">SHAP</span>
+                  explanations.
                 </p>
               </div>
               <div>
-                <b>Why also Isolation Forest?</b>
+                <b
+                  >Why
+                  <span class="tech-term" data-term="isolation-forest"
+                    >Isolation Forest</span
+                  >?</b
+                >
                 <p>
-                  It gives an independent unsupervised “how unusual is this?”
-                  signal.
+                  It gives an independent unsupervised anomaly signal without
+                  relying on training labels.
                 </p>
               </div>
               <div>
                 <b>Why synthetic data?</b>
                 <p>
-                  The PS requires synthetic data. We keep ground truth for
-                  evaluation and deliberately test on different generated
-                  distributions.
+                  The PS requires it. We evaluate on distinct generator
+                  distributions so the model learns concepts, not just fixed
+                  ranges.
                 </p>
               </div>
               <div>
-                <b>Does an alert prove crime?</b>
+                <b>Does an alert prove a crime?</b>
                 <p>
-                  No. It is an investigative lead based on behavioural and
-                  relational evidence.
+                  No. It is an investigative lead based on behavioral anomalies.
                 </p>
               </div>
               <div>
                 <b>Why a graph?</b>
                 <p>
-                  Because the useful question is often “what is connected to
-                  this entity?” rather than “what does this one row look like?”
+                  Because the real value is understanding who an entity is
+                  connected to, not just what they did in one transaction.
                 </p>
               </div>
             </div>
@@ -1613,6 +1446,18 @@ values = explainer.shap_values(X_one)</pre
         </footer>
       </main>
     </div>
+
+    <!-- Tech Term Modal -->
+    <div class="modal-overlay" id="defModal">
+      <div class="modal-content">
+        <button class="modal-close" id="defModalClose" aria-label="Close modal">
+          &times;
+        </button>
+        <h3 id="defModalTitle">Term</h3>
+        <p id="defModalText">Definition goes here.</p>
+      </div>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>
