@@ -1,37 +1,30 @@
 import networkx as nx
+import csv
 
 
-def create_graph():
+def create_graph(csv_file):
+
     graph = nx.MultiDiGraph()
 
-    graph.add_node("W1", type="wallet")
-    graph.add_node("W2", type="wallet")
+    with open(csv_file, "r", newline="") as file:
 
-    graph.add_edge(
-        "W1",
-        "W2",
-        type="transaction",
-        amount=5000,
-        transaction_id="TX001",
-        timestamp="2026-08-25"
-    )
+        reader = csv.DictReader(file)
 
-    graph.add_edge(
-        "W2",
-        "W1",
-        type="transaction",
-        amount=2500,
-        transaction_id="TX002",
-        timestamp="2026-08-25"
-    )
+        for row in reader:
 
-    graph.add_edge(
-        "W1",
-        "W2",
-        type="transaction",
-        amount=7500,
-        transaction_id="TX003",
-        timestamp="2026-08-25"
-    )
+            sender = row["sender"]
+            receiver = row["receiver"]
+
+            graph.add_node(sender, type="wallet")
+            graph.add_node(receiver, type="wallet")
+
+            graph.add_edge(
+                sender,
+                receiver,
+                type="transaction",
+                amount=float(row["amount"]),
+                transaction_id=row["transaction_id"],
+                timestamp=row["timestamp"]
+            )
 
     return graph
