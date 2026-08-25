@@ -3,217 +3,316 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#09111f">
-  <meta name="description" content="SIH26146 team operating manual — roles, learning roadmaps, module contracts, and the complete build flow.">
-  <title>SIH26146 · Team Operating Manual</title>
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="SIH26146 team field manual — learn the project, own a module, build it, test it, hand it off.">
+  <title>SIH26146 · Team Field Manual</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true">₿</div>
-        <div>
-          <div class="eyebrow">SIH 2026 · NTRO</div>
-          <h1>Bitcoin Intel</h1>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">₿</div>
+      <div>
+        <div class="eyebrow">SIH 2026 · NTRO</div>
+        <h1>Bitcoin Intel</h1>
+      </div>
+    </div>
+    <p class="sidebar-intro">This is the team’s working manual. Pick your role, learn the few things you actually need, then follow the build checklist.</p>
+
+    <nav class="role-nav" aria-label="Team sections">
+      <button class="nav-item active" data-tab="main"><span class="nav-dot accent"></span><span><strong>Main</strong><small>Understand the whole project</small></span></button>
+      <button class="nav-item" data-tab="m1"><span class="nav-dot cyan"></span><span><strong>M1 · Data</strong><small>Generate + clean the data</small></span></button>
+      <button class="nav-item" data-tab="m2"><span class="nav-dot violet"></span><span><strong>M2 · Graph</strong><small>Connect wallets, TXs, IPs</small></span></button>
+      <button class="nav-item" data-tab="m3"><span class="nav-dot green"></span><span><strong>M3 · ML</strong><small>XGBoost + anomaly detection</small></span></button>
+      <button class="nav-item" data-tab="m4"><span class="nav-dot amber"></span><span><strong>M4 · Risk</strong><small>Join everything together</small></span></button>
+      <button class="nav-item" data-tab="m5"><span class="nav-dot pink"></span><span><strong>M5 · Product</strong><small>Dashboard + offline</small></span></button>
+      <button class="nav-item" data-tab="m6"><span class="nav-dot slate"></span><span><strong>M6 · QA</strong><small>Testing + docs + demo</small></span></button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-pill"><span></span> No runtime internet</div>
+      <div class="tiny">Plain HTML · CSS · JS · GitHub Pages</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <button class="mobile-menu" id="menuBtn" aria-label="Open navigation">☰</button>
+      <div>
+        <div class="eyebrow">TEAM FIELD MANUAL</div>
+        <h2 id="pageTitle">Main · Understand the whole project</h2>
+      </div>
+      <div class="top-actions">
+        <span class="build-tag">36-hour build</span>
+        <a class="ghost-btn" href="https://github.com/bishuk-dev/sih26146-bitcoin-intel" target="_blank" rel="noopener noreferrer">Open GitHub</a>
+      </div>
+    </header>
+
+    <!-- ========================= MAIN ========================= -->
+    <section class="page active-page" data-page="main">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">START HERE</span>
+          <h3>Before we write code, <em>understand the machine.</em></h3>
+          <p class="lead">The team is not building a “Bitcoin AI.” We are building a small investigation system that takes messy transaction + network records, turns them into connected entities, finds suspicious behaviour, and shows a human why an entity was ranked highly.</p>
+          <div class="quick-note"><b>Rule for everyone:</b> you do not need to learn the whole field. Learn enough theory to make your module correctly, then learn by implementing it.</div>
+        </div>
+        <div class="hero-side">
+          <div class="big-stat"><b>5</b><span>technical owners</span></div>
+          <div class="big-stat"><b>1</b><span>QA / docs / demo owner</span></div>
+          <div class="big-stat"><b>1</b><span>shared pipeline</span></div>
         </div>
       </div>
 
-      <div class="sidebar-copy">
-        <p>Team operating manual for a six-person build: learn only what you need, own one module, integrate early.</p>
-      </div>
-
-      <nav class="role-nav" aria-label="Team sections">
-        <button class="nav-item active" data-tab="main"><span class="nav-dot accent"></span><span><strong>Main</strong><small>How everything fits</small></span></button>
-        <button class="nav-item" data-tab="m1"><span class="nav-dot cyan"></span><span><strong>M1 · Data</strong><small>Generator + ingestion</small></span></button>
-        <button class="nav-item" data-tab="m2"><span class="nav-dot violet"></span><span><strong>M2 · Graph</strong><small>Entity resolution</small></span></button>
-        <button class="nav-item" data-tab="m3"><span class="nav-dot green"></span><span><strong>M3 · ML</strong><small>Anomaly + clustering</small></span></button>
-        <button class="nav-item" data-tab="m4"><span class="nav-dot amber"></span><span><strong>M4 · Risk</strong><small>Fusion + integration</small></span></button>
-        <button class="nav-item" data-tab="m5"><span class="nav-dot pink"></span><span><strong>M5 · Product</strong><small>Dashboard + offline</small></span></button>
-        <button class="nav-item" data-tab="m6"><span class="nav-dot slate"></span><span><strong>M6 · QA</strong><small>Docs + demo</small></span></button>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="status-pill"><span></span> Air-gapped by design</div>
-        <div class="tiny">Static docs site · GitHub Pages · no CDN</div>
-      </div>
-    </aside>
-
-    <main class="content">
-      <header class="topbar">
-        <button class="mobile-menu" id="menuBtn" aria-label="Open navigation">☰</button>
-        <div>
-          <div class="eyebrow">TEAM BUILD SYSTEM</div>
-          <h2 id="pageTitle">Main · How everything fits</h2>
+      <section class="section">
+        <div class="section-head"><div><span class="kicker">01 · THE PROJECT IN ONE MINUTE</span><h4>What happens from CSV to alert?</h4></div></div>
+        <div class="pipeline big-pipeline">
+          <div class="pipeline-node cyan"><span>01</span><b>DATA</b><strong>M1</strong><small>Read, clean, validate</small></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-node violet"><span>02</span><b>GRAPH</b><strong>M2</strong><small>Connect IP ↔ TX ↔ wallet</small></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-node green"><span>03</span><b>ML</b><strong>M3</strong><small>XGBoost + anomaly signal</small></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-node amber"><span>04</span><b>RISK</b><strong>M4</strong><small>Combine evidence</small></div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-node pink"><span>05</span><b>UI</b><strong>M5</strong><small>Show the investigator</small></div>
         </div>
-        <div class="top-actions">
-          <div class="build-tag">36h build</div>
-          <button class="ghost-btn" id="copyLink">Copy tab link</button>
-        </div>
-      </header>
-
-      <section class="page active-page" data-page="main">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <div class="kicker">THE RULE</div>
-            <h3>Don’t learn everything.<br><span>Own one layer.</span></h3>
-            <p class="lead">Five technical members own five system boundaries. One support member owns QA, documentation and demo readiness. Everyone learns the minimum concepts required to make their layer work.</p>
-            <div class="hero-note"><span class="note-icon">↳</span><span>Every module must expose a small working interface early. No one waits for the “finished” system.</span></div>
-          </div>
-          <div class="metric-stack">
-            <div class="metric-card"><span>Technical owners</span><strong>5</strong><small>one per core layer</small></div>
-            <div class="metric-card"><span>Support owner</span><strong>1</strong><small>QA · docs · demo</small></div>
-            <div class="metric-card"><span>Critical path</span><strong>6</strong><small>ingest → graph → ML → risk → UI</small></div>
-          </div>
-        </div>
-
-        <section class="section">
-          <div class="section-head"><div><div class="kicker">SYSTEM MAP</div><h4>The pipeline everyone must understand</h4></div><span class="section-chip">shared mental model</span></div>
-          <div class="pipeline">
-            <div class="pipeline-node cyan"><span class="node-num">01</span><b>M1</b><strong>Data</strong><small>CSV / JSON → clean tables</small></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipeline-node violet"><span class="node-num">02</span><b>M2</b><strong>Graph</strong><small>IP ↔ TX ↔ wallet</small></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipeline-node green"><span class="node-num">03</span><b>M3</b><strong>ML</strong><small>Isolation Forest + DBSCAN</small></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipeline-node amber"><span class="node-num">04</span><b>M4</b><strong>Risk</strong><small>signals → ranked alerts</small></div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipeline-node pink"><span class="node-num">05</span><b>M5</b><strong>Product</strong><small>dashboard + offline run</small></div>
-          </div>
-          <div class="support-lane"><span class="lane-label">M6 · QA / docs / demo</span><span>validates every gate, captures evidence, scripts the final presentation</span></div>
-        </section>
-
-        <section class="section two-col">
-          <div class="panel accent-panel">
-            <div class="kicker">DESIGN DECISION</div>
-            <h4>Why hybrid, weighted toward unsupervised?</h4>
-            <p>Isolation Forest answers <b>“what is unusual?”</b>. DBSCAN answers <b>“which entities behave similarly?”</b>. The graph answers <b>“how are they connected?”</b>. Labels generated by our synthetic engine are kept for evaluation only, not training.</p>
-            <div class="mini-flow"><span>Anomaly</span><b>+</b><span>Cluster</span><b>+</b><span>Graph</span><b>+</b><span>Network</span><b>→</b><strong>Risk</strong></div>
-          </div>
-          <div class="panel">
-            <div class="kicker">DO NOT DO THIS</div>
-            <h4>Common ways the project gets derailed</h4>
-            <div class="bad-list">
-              <div><span>01</span><p>Everyone starts studying GNNs instead of implementing the MVP.</p></div>
-              <div><span>02</span><p>Six people change the same file and integration becomes the real bug.</p></div>
-              <div><span>03</span><p>Dashboard polish starts before the detector works on a 100-row dataset.</p></div>
-              <div><span>04</span><p>Offline is treated as a slide instead of an actual no-network test.</p></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head"><div><div class="kicker">MODULE CONTRACTS</div><h4>Freeze these interfaces early</h4></div><span class="section-chip">integration rule</span></div>
-          <div class="contracts">
-            <div class="contract"><span class="contract-tag cyan-bg">M1 → M2</span><code>blockchain_df, network_df</code><p>Validated tables. No downstream module needs to know how parsing happened.</p></div>
-            <div class="contract"><span class="contract-tag violet-bg">M2 → M3</span><code>graph, graph_features</code><p>NetworkX graph plus one row per analytical entity.</p></div>
-            <div class="contract"><span class="contract-tag green-bg">M3 → M4</span><code>entity_id, anomaly_score, cluster_id</code><p>Model result without exposing the dashboard to model internals.</p></div>
-            <div class="contract"><span class="contract-tag amber-bg">M4 → M5</span><code>entity_id, risk_score, priority, reasons</code><p>Stable alert JSON. The UI consumes this contract, not ML code.</p></div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-head"><div><div class="kicker">SHARED MILESTONES</div><h4>Five gates to a working system</h4></div></div>
-          <div class="milestones">
-            <div class="mile"><span>G1</span><b>Data works</b><p>CSV / JSON → validated DataFrame</p><small>Owner · M1</small></div>
-            <div class="mile"><span>G2</span><b>Graph works</b><p>DataFrame → graph → features</p><small>Owner · M2</small></div>
-            <div class="mile"><span>G3</span><b>ML works</b><p>Features → anomaly + clusters</p><small>Owner · M3</small></div>
-            <div class="mile"><span>G4</span><b>Investigation works</b><p>ML + graph → ranked explanations</p><small>Owner · M4</small></div>
-            <div class="mile"><span>G5</span><b>Product works</b><p>Upload → investigate → offline</p><small>Owner · M5</small></div>
-          </div>
-        </section>
+        <div class="support-lane"><b>M6 watches the whole pipeline</b><span>test cases · screenshots · claims · demo flow · judge questions</span></div>
       </section>
 
-      <section class="page" data-page="m1">
-        <div class="role-hero role-cyan"><div><span class="role-badge">M1 · DATA ENGINEER</span><h3>Make sure garbage never reaches the rest of the system.</h3><p>Own the synthetic world and the ingestion boundary. Your output becomes the input contract for the graph engineer.</p></div><div class="role-stat"><b>Own</b><span>data/generator/*<br>src/ingestion/*</span></div></div>
-        <div class="section two-col">
-          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Only the concepts you need</h4><ol class="learn-list"><li><b>Python + pandas</b><span>DataFrames, read_csv/read_json, filtering, groupby, merge, dtypes.</span></li><li><b>Validation</b><span>Missing fields, duplicates, invalid timestamps/IPs, numeric ranges.</span></li><li><b>Synthetic behavior</b><span>Normal, burst, fan-out, fan-in, chain, mixed scenarios.</span></li><li><b>Testing</b><span>Write small tests for accepted and rejected files.</span></li></ol></div>
-          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>data/generator/generate.py</code><code>src/ingestion/loader.py</code><code>tests/test_generator.py</code><code>tests/test_ingestion.py</code></div><div class="callout">Do not expose <code>ground_truth_anomalous</code> to ML training. It exists for post-hoc evaluation.</div></div>
+      <section class="section two-col">
+        <div class="panel paper">
+          <span class="kicker">02 · WHAT IS ACTUALLY UNDER THE HOOD?</span>
+          <h4>The data changes shape five times.</h4>
+          <div class="underhood">
+            <div><b>Raw rows</b><span>A transaction is just a record: timestamp, TXID, wallets, amounts, fee, IP and ports.</span></div>
+            <div><b>Clean tables</b><span>M1 fixes missing values, types, duplicates and bad records.</span></div>
+            <div><b>Graph</b><span>M2 turns records into nodes and edges so relationships become queryable.</span></div>
+            <div><b>Feature table</b><span>M2 measures behaviour: transaction count, degree, burstiness, IP reuse, counterparties, etc.</span></div>
+            <div><b>Model output</b><span>M3 turns those measurements into suspiciousness signals; M4 turns signals into ranked alerts.</span></div>
+          </div>
         </div>
-        <div class="section"><div class="section-head"><div><div class="kicker">SYNTHETIC ENGINE</div><h4>Generate behaviors, not random rows</h4></div></div><div class="behavior-grid"><div><b>NORMAL</b><span>ordinary payments, exchange use, miner payouts</span></div><div><b>BURST</b><span>normal activity followed by dense rapid transfers</span></div><div><b>FAN-OUT</b><span>one source distributes to many wallets</span></div><div><b>FAN-IN</b><span>many wallets consolidate into one</span></div><div><b>CHAIN</b><span>A → B → C → D with short inter-arrivals</span></div><div><b>MIXED</b><span>combined behaviors for harder tests</span></div></div></div>
-        <div class="section"><div class="section-head"><div><div class="kicker">HANDOFF</div><h4>Your contract to M2</h4></div></div><div class="handoff"><div><span>BLOCKCHAIN</span><code>timestamp · txid · input_wallet · output_wallet · amount · fee · script_type</code></div><div><span>NETWORK</span><code>timestamp · src_ip · dst_ip · src_port · dst_port · txid</code></div></div></div>
-        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>You're done when…</h4><p>You can give the loader a good file, missing-column file, duplicate file, empty file and malformed file and predict exactly what each should do.</p></div><div class="panel"><div class="kicker">DO NOT OVERLEARN</div><h4>Skip for now</h4><p>Bitcoin cryptography, blockchain internals, Spark, huge-scale distributed systems. Your job is reliable synthetic data and clean ingestion first.</p></div></div>
+        <div class="panel dark-paper">
+          <span class="kicker">03 · THE CORE IDEA</span>
+          <h4>Three questions, three tools.</h4>
+          <div class="question-stack">
+            <div><b>“Does this look suspicious?”</b><span>XGBoost learns from our synthetic training labels.</span></div>
+            <div><b>“Does this look strange?”</b><span>Isolation Forest gives an independent anomaly signal.</span></div>
+            <div><b>“What is connected to it?”</b><span>The graph shows the transaction and network evidence around the entity.</span></div>
+          </div>
+        </div>
       </section>
 
-      <section class="page" data-page="m2">
-        <div class="role-hero role-violet"><div><span class="role-badge">M2 · GRAPH ENGINEER</span><h3>Turn tables into relationships an investigator can follow.</h3><p>Own entity resolution, graph construction and graph-level features. Think in nodes, edges, paths and evidence.</p></div><div class="role-stat"><b>Own</b><span>src/graph/*</span></div></div>
-        <div class="section two-col">
-          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Graph basics → NetworkX → heuristics</h4><ol class="learn-list"><li><b>Graph vocabulary</b><span>Node, edge, directed graph, weighted graph, degree, path, neighbor.</span></li><li><b>NetworkX</b><span>MultiDiGraph, node/edge attributes, neighbors, degree and metrics.</span></li><li><b>Bitcoin entity thinking</b><span>TXs, wallets and IP observations are different node types.</span></li><li><b>CIO heuristic</b><span>Multiple inputs can suggest common ownership, but the link is a heuristic, not truth.</span></li></ol></div>
-          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>src/graph/build_graph.py</code><code>src/graph/cio.py</code><code>src/graph/features.py</code><code>tests/test_graph.py</code></div><div class="callout">Keep relationship provenance. Prefer <code>method=CIO</code> and a confidence/evidence score over pretending a heuristic is certain.</div></div>
+      <section class="section">
+        <div class="section-head"><div><span class="kicker">04 · ML DECISION</span><h4>Why the current plan is XGBoost first, Isolation Forest second</h4></div><span class="section-chip green-chip">official team plan</span></div>
+        <div class="decision-grid">
+          <div class="decision-card primary"><span class="decision-label">PRIMARY</span><h5>XGBoost</h5><p>Supervised model. We can train it because our synthetic generator provides ground-truth labels. It is also the easiest route to SHAP explanations.</p><div class="decision-arrow">features → class probability</div></div>
+          <div class="decision-card secondary"><span class="decision-label">SECONDARY</span><h5>Isolation Forest</h5><p>Unsupervised check. It asks whether behaviour is unusual compared with the wider population. It does not prove wrongdoing.</p><div class="decision-arrow">features → anomaly score</div></div>
+          <div class="decision-card support"><span class="decision-label">SUPPORTING</span><h5>Clustering + graph</h5><p>Groups similar entities and gives investigators the surrounding structure needed to inspect the alert.</p><div class="decision-arrow">features / edges → context</div></div>
         </div>
-        <div class="section"><div class="section-head"><div><div class="kicker">TARGET GRAPH</div><h4>What the graph should look like</h4></div></div><div class="ascii-graph"><span class="g-ip">IP_01</span><i>observed</i><span class="arrow">↓</span><span class="g-tx">TX_100</span><div class="fork"><span><span class="g-wallet">W_A</span><small>input</small></span><span><span class="g-wallet">W_B</span><small>output</small></span></div><span class="arrow">↓</span><span class="g-tx">TX_101</span><div class="fork"><span class="g-wallet">W_C</span><span class="g-wallet">W_D</span></div></div></div>
-        <div class="section"><div class="section-head"><div><div class="kicker">FEATURE TABLE</div><h4>What M3 needs from you</h4></div></div><div class="feature-chips"><span>degree</span><span>in_degree</span><span>out_degree</span><span>PageRank</span><span>clustering</span><span>betweenness</span><span>unique_counterparties</span><span>cluster_size</span></div></div>
-        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>Build a toy graph first</h4><pre><code>A → B
-A → C
-A → D
-
-B → X
-C → X
-D → X</code></pre><p>Confirm A has high out-degree and X has high in-degree. Then replace the toy graph with real generated records.</p></div><div class="panel"><div class="kicker">DO NOT OVERLEARN</div><h4>Skip GNNs for now</h4><p>You do not need GraphSAGE or GAT to build the first working graph. The graph's most valuable job is correlation, features and evidence.</p></div></div>
+        <p class="small-note">Important: the synthetic label is allowed into XGBoost training, but never as a feature. For evaluation, create separate train / validation / test scenarios so the model is not simply memorising the generator.</p>
       </section>
 
-      <section class="page" data-page="m3">
-        <div class="role-hero role-green"><div><span class="role-badge">M3 · ML ENGINEER</span><h3>Answer “what is unusual?” and “which entities behave similarly?”</h3><p>Your critical path is simple: feature matrix → scaling → Isolation Forest → DBSCAN → evaluation. SHAP comes later.</p></div><div class="role-stat"><b>Own</b><span>src/ml/*</span></div></div>
-        <div class="section two-col">
-          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Don't drown in ML theory</h4><ol class="learn-list"><li><b>Feature vectors</b><span>Turn wallet behavior into numbers.</span></li><li><b>Standardization</b><span>Learn why features on very different scales need normalization.</span></li><li><b>Isolation Forest</b><span>Learn the idea of isolating unusual points, then implement it.</span></li><li><b>DBSCAN</b><span>Dense groups become clusters; sparse points become noise.</span></li><li><b>Evaluation</b><span>Use your synthetic labels only after prediction: precision, recall, F1.</span></li></ol></div>
-          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>src/ml/detect.py</code><code>src/ml/preprocess.py</code><code>src/ml/evaluate.py</code><code>src/ml/explain.py</code></div><div class="callout">Start with DBSCAN, not HDBSCAN. If the critical path is stable, experiment later. Never feed generator labels into training.</div></div>
+      <section class="section two-col">
+        <div class="panel">
+          <span class="kicker">05 · GRAPH THEORY, IN PLAIN ENGLISH</span>
+          <h4>What M2 is doing for the rest of us</h4>
+          <p>A graph is just a way to store <b>things</b> and the <b>relationships between them</b>.</p>
+          <div class="mini-graph">
+            <div class="g-node ip">IP-01</div><div class="g-edge">observed</div><div class="g-node tx">TX-44</div><div class="g-edge">output</div><div class="g-node wallet">W-17</div>
+          </div>
+          <p class="muted">The useful part is that we can ask questions such as “what is two or three hops away from this wallet?” instead of staring at unrelated rows in a CSV.</p>
         </div>
-        <div class="section"><div class="section-head"><div><div class="kicker">MODEL ROLES</div><h4>Keep the jobs separate</h4></div></div><div class="role-split"><div><b>Isolation Forest</b><span>“What is unusual compared with the baseline?”</span></div><div><b>DBSCAN</b><span>“Which entities sit in similar behavioral regions?”</span></div><div><b>Graph</b><span>“How are these entities actually connected?”</span></div><div><b>Ground truth</b><span>“Did our synthetic injection get detected?” — evaluation only.</span></div></div></div>
-        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>Make the detector react to behavior</h4><p>M1 gives you normal, burst, fan-out and chain scenarios. Your first useful result is not “99% accuracy”; it is being able to show that anomalous scenarios systematically receive stronger anomaly scores.</p></div><div class="panel"><div class="kicker">SHAP TIMING</div><h4>Do this after the detector works</h4><p>If SHAP becomes a blocker, ship a simpler evidence explanation first: deviation from baseline + graph evidence + feature contribution. The system must not wait for XAI perfection.</p></div></div>
-        <div class="section"><div class="section-head"><div><div class="kicker">HANDOFF</div><h4>M4 receives this stable record</h4></div></div><div class="json-card"><code>{
-  "entity_id": "W17",
-  "anomaly_score": 0.91,
-  "is_anomaly": true,
-  "cluster_id": 4,
-  "cluster_size": 17
-}</code></div></div>
+        <div class="panel">
+          <span class="kicker">06 · IMPORTANT LIMIT</span>
+          <h4>Anomaly does not mean crime.</h4>
+          <div class="quote-box">“This entity behaves differently enough to become an investigative lead.”</div>
+          <p>Keep this language in the UI, README and presentation. A high risk score is a prioritisation signal, not a legal conclusion.</p>
+        </div>
       </section>
 
-      <section class="page" data-page="m4">
-        <div class="role-hero role-amber"><div><span class="role-badge">M4 · RISK + INTEGRATION</span><h3>Make all five modules behave like one system.</h3><p>You own the boundary nobody notices until it breaks: module contracts, pipeline orchestration, risk fusion, alert formatting and end-to-end tests.</p></div><div class="role-stat"><b>Own</b><span>src/scoring/*<br>src/pipeline.py<br>integration tests</span></div></div>
-        <div class="section two-col">
-          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Think like a systems engineer</h4><ol class="learn-list"><li><b>Python modules</b><span>Functions, imports, clean interfaces.</span></li><li><b>Data contracts</b><span>Know exactly what comes in and out of M1/M2/M3.</span></li><li><b>JSON</b><span>Turn model output into a stable alert format for M5.</span></li><li><b>Testing</b><span>Write integration tests that catch broken handoffs.</span></li></ol></div>
-          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>src/scoring/risk_engine.py</code><code>src/pipeline.py</code><code>tests/test_pipeline.py</code><code>tests/test_scoring.py</code></div><div class="callout">M4 should be the first person to say “this module contract is wrong.” Catch integration bugs before the dashboard does.</div></div>
+      <section class="section">
+        <div class="section-head"><div><span class="kicker">07 · SHARED DATA CONTRACTS</span><h4>These are the hand-offs between people</h4></div></div>
+        <div class="contract-table">
+          <div class="contract-row head"><b>From → To</b><b>What is handed over</b><b>Meaning</b></div>
+          <div class="contract-row"><b>M1 → M2</b><code>blockchain_df, network_df</code><span>validated source tables</span></div>
+          <div class="contract-row"><b>M2 → M3</b><code>graph, features_df</code><span>graph + one feature row per entity</span></div>
+          <div class="contract-row"><b>M3 → M4</b><code>entity_id, class_probability, anomaly_score, cluster_id</code><span>ML signals</span></div>
+          <div class="contract-row"><b>M4 → M5</b><code>alerts.json + investigation graph</code><span>stable data the dashboard can display</span></div>
         </div>
-        <div class="section"><div class="section-head"><div><div class="kicker">RISK FUSION</div><h4>Signals become a ranked investigative lead</h4></div></div><div class="fusion-row"><div><span>ANOMALY</span><b>40%</b><small>starting weight</small></div><span class="plus">+</span><div><span>GRAPH</span><b>20%</b><small>starting weight</small></div><span class="plus">+</span><div><span>NETWORK</span><b>20%</b><small>starting weight</small></div><span class="plus">+</span><div><span>CLUSTER</span><b>20%</b><small>starting weight</small></div><span class="equals">=</span><div class="result"><span>RISK</span><b>0–100</b><small>ranked alert</small></div></div><p class="muted-note">These weights are configuration, not scientific truth. Compare a few settings on held-out synthetic scenarios and keep the result that behaves best.</p></div>
-        <div class="section"><div class="section-head"><div><div class="kicker">ALERT CONTRACT</div><h4>This is what M5 displays</h4></div></div><div class="json-card"><code>{
+      </section>
+
+      <section class="section">
+        <div class="section-head"><div><span class="kicker">08 · HOW WE SHOULD BUILD IT</span><h4>Do this in order. Do not jump ahead.</h4></div></div>
+        <div class="gates">
+          <div class="gate"><span>1</span><div><b>Data works</b><p>100-row CSV can be loaded and validated.</p><small>M1</small></div></div>
+          <div class="gate"><span>2</span><div><b>Graph works</b><p>100 rows become a useful IP/TX/wallet graph.</p><small>M2</small></div></div>
+          <div class="gate"><span>3</span><div><b>ML works</b><p>Features → XGBoost + anomaly score → measured result.</p><small>M3</small></div></div>
+          <div class="gate"><span>4</span><div><b>Risk works</b><p>One command returns ranked alerts with reasons.</p><small>M4</small></div></div>
+          <div class="gate"><span>5</span><div><b>Product works</b><p>Upload → investigate → graph → explanation with internet disabled.</p><small>M5</small></div></div>
+        </div>
+      </section>
+
+      <section class="section two-col">
+        <div class="panel warning-panel">
+          <span class="kicker">DO NOT WASTE TIME ON</span>
+          <h4>These are later, not now</h4>
+          <ul class="plain-list"><li>GraphSAGE / GAT</li><li>Fancy deep learning</li><li>GeoIP before the core pipeline works</li><li>Millions of rows before a 100-row end-to-end test works</li><li>Login, settings, profiles, notifications</li><li>Docker before local Python works</li></ul>
+        </div>
+        <div class="panel success-panel">
+          <span class="kicker">THE TEAM RULE</span>
+          <h4>Every finished task must leave evidence.</h4>
+          <ol class="plain-list numbered"><li>Code committed on your branch.</li><li>A tiny test or sample proving it works.</li><li>A note saying what your output looks like.</li><li>A clear hand-off to the next member.</li></ol>
+        </div>
+      </section>
+    </section>
+
+    <!-- ========================= M1 ========================= -->
+    <section class="page" data-page="m1">
+      <div class="role-hero role-cyan"><div><span class="role-badge">M1 · DATA ENGINEER</span><h3>Your job: make believable data and make bad input fail early.</h3><p>You own the front door. Everything after you assumes the data is shaped correctly.</p></div><div class="role-stat"><b>Own</b><span>data/generator/*<br>src/ingestion/*</span></div></div>
+
+      <section class="section two-col">
+        <div class="panel"><span class="kicker">WHAT TO LEARN FIRST</span><h4>Learn this, then code.</h4><ol class="step-list"><li><b>pandas</b><span>DataFrame, read_csv, read_json, filtering, groupby, merge, dtypes.</span></li><li><b>Validation</b><span>Missing fields, duplicate rows, invalid timestamps, IP validation, numeric ranges.</span></li><li><b>Random data generation</b><span>NumPy random generator + Faker for IPs and identifiers.</span></li><li><b>Scenario thinking</b><span>Normal, burst, fan-out, fan-in, chain, mixed.</span></li></ol></div>
+        <div class="panel paper"><span class="kicker">FILES</span><h4>Work here</h4><div class="file-list"><code>data/generator/generate.py</code><code>src/ingestion/loader.py</code><code>tests/test_generator.py</code><code>tests/test_ingestion.py</code></div><div class="callout">Do not change graph or ML code just to make your module work. Fix the data at the boundary.</div></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><div><span class="kicker">BUILD ORDER</span><h4>Do these steps in this exact order</h4></div></div>
+        <div class="action-list">
+          <div class="action"><span>01</span><div><h5>Create the 100-row sample</h5><p>Make the smallest hand-checkable dataset first. Include at least one of every important field.</p><pre>data/sample/blockchain.csv
+data/sample/network.csv</pre></div></div>
+          <div class="action"><span>02</span><div><h5>Write the schema check</h5><p>Reject files with missing required columns. Convert timestamps and numeric columns to fixed types.</p><pre>required = ["timestamp", "txid", "input_wallet", "output_wallet", "amount", "fee", "script_type"]</pre></div></div>
+          <div class="action"><span>03</span><div><h5>Generate normal behaviour</h5><p>Create realistic wallet activity first. It should have a mixture of small and medium transfers, repeated counterparties, and ordinary timing.</p></div></div>
+          <div class="action"><span>04</span><div><h5>Add controlled anomalies</h5><p>Implement burst, fan-out, fan-in, chain and mixed scenarios. Keep a hidden <code>ground_truth_anomalous</code> and <code>scenario_type</code> column for evaluation.</p></div></div>
+          <div class="action"><span>05</span><div><h5>Make train/validation/test generators different</h5><p>Change ranges and scenario mixtures so the model cannot simply memorise one magic number.</p></div></div>
+          <div class="action"><span>06</span><div><h5>Write failure tests</h5><p>Test empty file, missing column, duplicate TX, bad IP, negative amount and bad timestamp.</p></div></div>
+        </div>
+      </section>
+
+      <section class="section two-col">
+        <div class="panel"><span class="kicker">HAND OFF TO M2</span><h4>What M2 should receive</h4><div class="code-card"><code>blockchain_df</code><code>network_df</code></div><p>Same column names every time. M2 should not need to know which file format you parsed.</p></div>
+        <div class="panel"><span class="kicker">DONE WHEN</span><h4>You are actually finished when…</h4><ul class="check-list"><li>100-row sample loads.</li><li>Bad files fail with useful messages.</li><li>Generator can produce all six scenarios.</li><li>Ground truth exists but is not mixed into normal features.</li><li>M2 can use your output without editing it manually.</li></ul></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">COMMON MISTAKES</span><h4>Watch these</h4></div></div><div class="mistake-grid"><div><b>Random = realistic?</b><p>No. Behaviour is the point. Random rows without relationships are useless for this project.</p></div><div><b>Labels are public?</b><p>No. Keep them in the evaluation data path, not in the ML feature set.</p></div><div><b>Huge data first?</b><p>No. Get 100 rows working, then 10k, then 100k.</p></div></div></section>
+    </section>
+
+    <!-- ========================= M2 ========================= -->
+    <section class="page" data-page="m2">
+      <div class="role-hero role-violet"><div><span class="role-badge">M2 · GRAPH ENGINEER</span><h3>Your job: turn rows into relationships the rest of the team can reason about.</h3><p>The graph is not decoration. It is where the transaction and network layers become one investigative picture.</p></div><div class="role-stat"><b>Own</b><span>src/graph/*</span></div></div>
+
+      <section class="section two-col">
+        <div class="panel"><span class="kicker">LEARN FIRST</span><h4>The small set of graph ideas you need</h4><ol class="step-list"><li><b>Node</b><span>A thing: wallet, TX, IP, ASN.</span></li><li><b>Edge</b><span>A relationship: INPUT, OUTPUT, OBSERVED, SENDS_TO.</span></li><li><b>Directed graph</b><span>Direction matters for money flow.</span></li><li><b>Degree</b><span>How many incoming/outgoing relationships a node has.</span></li><li><b>Path / hop</b><span>How far one entity is from another.</span></li><li><b>Entity clustering</b><span>When multiple wallet addresses may belong to one actor.</span></li></ol></div>
+        <div class="panel paper"><span class="kicker">FILES</span><h4>Work here</h4><div class="file-list"><code>src/graph/build_graph.py</code><code>src/graph/cio.py</code><code>src/graph/features.py</code><code>tests/test_graph.py</code></div><div class="callout">Start with a tiny graph you can draw on paper. If you can't explain a node or edge, don't add it yet.</div></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">BUILD ORDER</span><h4>Build the graph in layers</h4></div></div><div class="action-list">
+        <div class="action"><span>01</span><div><h5>Build the transaction-only graph</h5><p>Start with wallet → TX → wallet. Confirm amounts and timestamps are stored on edges.</p><pre>W01 --INPUT--> TX01 --OUTPUT--> W02</pre></div></div>
+        <div class="action"><span>02</span><div><h5>Add network observations</h5><p>Connect IP → TX when the source timestamp falls within the agreed observation rule from the PS/synthetic generator.</p><pre>IP01 --OBSERVED--> TX01</pre></div></div>
+        <div class="action"><span>03</span><div><h5>Add entity clustering</h5><p>Implement Common Input Ownership as a heuristic. Keep the method and confidence; do not present the cluster as absolute truth.</p></div></div>
+        <div class="action"><span>04</span><div><h5>Compute graph features</h5><p>At minimum: in-degree, out-degree, total degree, unique counterparties, PageRank, clustering coefficient and cluster size.</p></div></div>
+        <div class="action"><span>05</span><div><h5>Add behavioural graph features</h5><p>Fan-in/out, merge/split ratios, path length and simple peeling-chain length. Avoid expensive centralities until the basic pipeline is fast.</p></div></div>
+        <div class="action"><span>06</span><div><h5>Save a small investigation subgraph</h5><p>Given an entity ID, return its 2–3 hop neighbourhood. M5 will use this later for the evidence view.</p></div></div>
+      </div></section>
+
+      <section class="section two-col">
+        <div class="panel"><span class="kicker">HAND OFF TO M3</span><h4>The ML input</h4><div class="code-card"><code>features_df</code><code>entity_id + numerical features</code></div><p>One row per analytical entity. No raw wallet strings as ML features. No ground-truth label in the feature matrix.</p></div>
+        <div class="panel"><span class="kicker">DONE WHEN</span><h4>Prove these three things</h4><ul class="check-list"><li>A fan-out wallet has high out-degree.</li><li>A fan-in wallet has high in-degree.</li><li>Clicking an entity returns a sensible local subgraph.</li></ul></div>
+      </section>
+    </section>
+
+    <!-- ========================= M3 ========================= -->
+    <section class="page" data-page="m3">
+      <div class="role-hero role-green"><div><span class="role-badge">M3 · ML / DETECTION ENGINEER</span><h3>Your job: turn M2's measurements into evidence the system can rank.</h3><p>Primary model: XGBoost. Secondary model: Isolation Forest. Your biggest responsibility is preventing leakage and proving the model actually works.</p></div><div class="role-stat"><b>Own</b><span>src/ml/*<br>ML experiments</span></div></div>
+
+      <section class="section two-col">
+        <div class="panel"><span class="kicker">WHAT YOU NEED TO UNDERSTAND</span><h4>Learn the idea before the library.</h4><ol class="step-list"><li><b>Feature</b><span>A measurable property such as degree, burstiness or transaction count.</span></li><li><b>Sample</b><span>One entity / wallet row.</span></li><li><b>Classification</b><span>Learn from labelled examples: benign vs anomalous.</span></li><li><b>Overfitting</b><span>Model memorises the training examples instead of learning a useful pattern.</span></li><li><b>Leakage</b><span>Information from the answer sneaks into the features or test process.</span></li><li><b>Precision / recall / F1</b><span>Measure whether alerts are useful, not merely numerous.</span></li></ol></div>
+        <div class="panel paper"><span class="kicker">FILES</span><h4>Your ML workspace</h4><div class="file-list"><code>src/ml/preprocess.py</code><code>src/ml/detect.py</code><code>src/ml/evaluate.py</code><code>src/ml/explain.py</code><code>tests/test_ml.py</code><code>ml_learning/*</code></div><div class="callout">Do not start with SHAP or hyperparameter tuning. First make a tiny XGBoost model produce a real metric on held-out data.</div></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">YOUR BUILD ORDER</span><h4>Follow this order</h4></div></div><div class="action-list">
+        <div class="action"><span>01</span><div><h5>Build a toy classifier</h5><p>Create 100–500 synthetic feature rows and train XGBoost on two classes. Do this before touching the Bitcoin pipeline.</p><pre>X → XGBoost → probability → prediction</pre></div></div>
+        <div class="action"><span>02</span><div><h5>Create the feature list</h5><p>Agree with M2 on the numerical feature columns. Example: transaction_count, total_inflow, counterparties, burstiness, degree, pagerank, IP_count.</p></div></div>
+        <div class="action"><span>03</span><div><h5>Make three dataset versions</h5><p>Training, validation and test must come from different random seeds and preferably different behaviour ranges. This is how you defend yourself against the “you trained on your own generator” question.</p></div></div>
+        <div class="action"><span>04</span><div><h5>Train XGBoost</h5><p>Start with a small CPU-friendly model. Save the feature list and the trained model. Do not tune ten parameters at once.</p><pre>model.fit(X_train, y_train)
+prob = model.predict_proba(X_test)[:, 1]</pre></div></div>
+        <div class="action"><span>05</span><div><h5>Measure the model</h5><p>Report precision, recall, F1 and PR-AUC. Also record false positives. If the model catches every anomaly by flagging everything, that is not a success.</p></div></div>
+        <div class="action"><span>06</span><div><h5>Add SHAP</h5><p>Once the model is stable, use TreeExplainer to show the top features pushing a prediction higher or lower.</p><pre>explainer = shap.TreeExplainer(model)
+values = explainer.shap_values(X_one)</pre></div></div>
+        <div class="action"><span>07</span><div><h5>Add Isolation Forest</h5><p>Train it on the same behavioural features without labels. Store its anomaly score separately. Do not pretend the score is a probability of crime.</p></div></div>
+        <div class="action"><span>08</span><div><h5>Hand both signals to M4</h5><p>Return class probability, anomaly score, cluster ID and top explanation features.</p></div></div>
+      </div></section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">MODEL UNDER THE HOOD</span><h4>What your code is actually doing</h4></div></div><div class="model-map">
+        <div class="model-step"><span>1</span><b>M2's features</b><small>one row per entity</small></div><div class="pipe-arrow">→</div>
+        <div class="model-step"><span>2</span><b>Preprocess</b><small>select columns / fill missing values</small></div><div class="pipe-arrow">→</div>
+        <div class="model-step primary"><span>3</span><b>XGBoost</b><small>learn suspicious patterns</small></div><div class="pipe-arrow">→</div>
+        <div class="model-step"><span>4</span><b>SHAP</b><small>explain prediction</small></div>
+      </div><div class="model-map secondary-row"><div class="model-step secondary"><span>+</span><b>Isolation Forest</b><small>independent unusualness signal</small></div><div class="pipe-arrow">→</div><div class="model-step"><span>→</span><b>M4</b><small>combine signals into risk</small></div></div></section>
+
+      <section class="section two-col">
+        <div class="panel"><span class="kicker">EVALUATION RULE</span><h4>Ground truth is for training AND testing — but never as a feature.</h4><div class="code-card"><code>X = df[FEATURE_COLUMNS]</code><code>y = df["ground_truth_anomalous"]</code><code>model.fit(X_train, y_train)</code><code>metrics(y_test, predictions)</code></div><p>The test label is not shown to the model. It only lets us measure how well our detector did.</p></div>
+        <div class="panel warning-panel"><span class="kicker">DO NOT CHEAT YOURSELF</span><h4>Red flags in your own experiment</h4><ul class="check-list"><li>Random row split only.</li><li>Ground-truth column accidentally included in X.</li><li>Training and test generated with exactly the same tiny rule.</li><li>Accuracy shown without false positives.</li><li>“Confidence 97%” without saying what it means.</li></ul></div>
+      </section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">DONE WHEN</span><h4>You can show these numbers on your own laptop</h4></div></div><div class="done-grid"><div><b>Baseline</b><span>XGBoost produces a real F1 / PR-AUC on a held-out set.</span></div><div><b>Robustness</b><span>Performance does not collapse when generator ranges or scenario mixture changes.</span></div><div><b>Explainability</b><span>For one alert, you can list the top features behind the prediction.</span></div><div><b>Handoff</b><span>M4 can consume one JSON row without reading your training code.</span></div></div></section>
+    </section>
+
+    <!-- ========================= M4 ========================= -->
+    <section class="page" data-page="m4">
+      <div class="role-hero role-amber"><div><span class="role-badge">M4 · RISK + INTEGRATION</span><h3>Your job: make five separate modules behave like one application.</h3><p>You are the person who makes sure the system can go from one command to a ranked alert without someone manually copying data between notebooks.</p></div><div class="role-stat"><b>Own</b><span>src/scoring/*<br>src/pipeline.py<br>integration tests</span></div></div>
+
+      <section class="section two-col"><div class="panel"><span class="kicker">LEARN FIRST</span><h4>You need software integration more than advanced ML.</h4><ol class="step-list"><li><b>Functions and modules</b><span>How to keep each stage independent.</span></li><li><b>Data contracts</b><span>What each function receives and returns.</span></li><li><b>JSON</b><span>The dashboard-friendly alert format.</span></li><li><b>Testing</b><span>How to prove the whole pipeline runs from a clean start.</span></li></ol></div><div class="panel paper"><span class="kicker">FILES</span><h4>Work here</h4><div class="file-list"><code>src/scoring/risk_engine.py</code><code>src/pipeline.py</code><code>tests/test_pipeline.py</code><code>tests/test_scoring.py</code></div></div></section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">BUILD ORDER</span><h4>Make one command do the whole job</h4></div></div><div class="action-list">
+        <div class="action"><span>01</span><div><h5>Define the alert schema</h5><p>Agree on: entity_id, risk_score, priority, class_probability, anomaly_score, cluster_id, reasons, evidence_ids.</p></div></div>
+        <div class="action"><span>02</span><div><h5>Write the pipeline skeleton</h5><p>Call ingestion → graph → features → ML → scoring. At first it can use tiny sample data.</p><pre>python -m src.pipeline data/sample/blockchain.csv</pre></div></div>
+        <div class="action"><span>03</span><div><h5>Build the risk score</h5><p>Start with configurable weights. Later test a few weight combinations on held-out scenarios instead of claiming the weights are “scientifically correct.”</p></div></div>
+        <div class="action"><span>04</span><div><h5>Turn technical outputs into reasons</h5><p>Examples: “high transaction velocity”, “unusually high fan-out”, “IP reused across many wallets”.</p></div></div>
+        <div class="action"><span>05</span><div><h5>Return ranked alerts</h5><p>Sort highest risk first. Keep enough evidence for the dashboard to open the entity's graph and timeline.</p></div></div>
+        <div class="action"><span>06</span><div><h5>Run the same pipeline from a clean shell</h5><p>If your system needs five manual commands, keep integrating until it can be launched simply.</p></div></div>
+      </div></section>
+      <section class="section two-col"><div class="panel"><span class="kicker">HAND OFF TO M5</span><h4>Give the dashboard a boring, stable JSON shape.</h4><div class="code-card"><code>{
   "entity_id": "W17",
   "risk_score": 91,
   "priority": "HIGH",
+  "class_probability": 0.87,
+  "anomaly_score": 0.94,
   "cluster_id": 4,
-  "reasons": [
-    "High transaction velocity",
-    "Abnormal fan-out pattern",
-    "IP reused across multiple entities"
-  ]
-}</code></div></div>
-        <div class="section two-col"><div class="panel"><div class="kicker">SUCCESS TEST</div><h4>One command should run the backend</h4><pre><code>python -m src.pipeline data/sample.csv</code></pre><p>Result: a machine-readable alert artifact that the dashboard can consume without manually invoking five different modules.</p></div><div class="panel"><div class="kicker">YOUR BIGGEST JOB</div><h4>Protect the critical path</h4><p>Don't let GeoIP, Docker, SHAP, HDBSCAN or advanced graph metrics block the basic flow. Ship the smallest integrated system first.</p></div></div>
-      </section>
+  "reasons": ["high fan-out", "IP reused", "burst activity"]
+}</code></div></div><div class="panel"><span class="kicker">DONE WHEN</span><h4>Your test is simple.</h4><ul class="check-list"><li>One command creates the alert artifact.</li><li>Same input produces reproducible output.</li><li>Dashboard does not import your internal model code.</li><li>Broken modules fail with a readable error.</li></ul></div></section>
+    </section>
 
-      <section class="page" data-page="m5">
-        <div class="role-hero role-pink"><div><span class="role-badge">M5 · DASHBOARD + OFFLINE</span><h3>Make the system usable — and prove it works with the internet off.</h3><p>Own the investigator experience plus local assets and deployment scripts. The judges should understand the value by clicking three things.</p></div><div class="role-stat"><b>Own</b><span>dashboard/*<br>docker/*<br>scripts/*</span></div></div>
-        <div class="section two-col">
-          <div class="panel"><div class="kicker">LEARN IN THIS ORDER</div><h4>Streamlit → PyVis → offline</h4><ol class="learn-list"><li><b>Streamlit</b><span>title, metrics, dataframe, button, selectbox, columns, state.</span></li><li><b>PyVis</b><span>Nodes, edges, grouping, labels, local resources.</span></li><li><b>Investigation UX</b><span>Overview → Ranked Alerts → Entity Detail.</span></li><li><b>Offline packaging</b><span>Local wheels, local assets, localhost, optional Docker image.</span></li></ol></div>
-          <div class="panel"><div class="kicker">FILES</div><h4>Where you work</h4><div class="file-tree"><code>dashboard/app.py</code><code>dashboard/graph_view.py</code><code>docker/build_offline.sh</code><code>docker/Dockerfile</code><code>scripts/test_offline.sh</code></div><div class="callout">No CDN-hosted JS. No runtime API. No runtime pip install. The app must survive a physically disconnected network.</div></div>
-        </div>
-        <div class="section"><div class="section-head"><div><div class="kicker">JUDGE FLOW</div><h4>Build these three screens first</h4></div></div><div class="screen-flow"><div><span>01</span><b>Overview</b><p>Transactions · wallets · IPs · total alerts · high-priority alerts</p></div><i>→</i><div><span>02</span><b>Ranked Alerts</b><p>Entity · risk · cluster · reason · priority</p></div><i>→</i><div><span>03</span><b>Investigation</b><p>Graph · timeline · network context · evidence</p></div></div></div>
-        <div class="section"><div class="section-head"><div><div class="kicker">OFFLINE CHECK</div><h4>The demo that earns the “offline” claim</h4></div></div><div class="offline-check"><div class="check"><span>✓</span> Start locally</div><div class="check"><span>✓</span> Upload dataset</div><div class="check"><span>✓</span> Run ML</div><div class="check"><span>✓</span> Render graph</div><div class="check"><span>✓</span> Show explanations</div><div class="check"><span>✓</span> Disable network</div><div class="check"><span>✓</span> Repeat the flow</div></div></div>
-      </section>
+    <!-- ========================= M5 ========================= -->
+    <section class="page" data-page="m5">
+      <div class="role-hero role-pink"><div><span class="role-badge">M5 · PRODUCT + OFFLINE</span><h3>Your job: make the system understandable in three clicks — then prove it works without internet.</h3><p>The final product is an investigator tool, not a collection of charts.</p></div><div class="role-stat"><b>Own</b><span>dashboard/*<br>docker/*<br>scripts/*</span></div></div>
 
-      <section class="page" data-page="m6">
-        <div class="role-hero role-slate"><div><span class="role-badge">M6 · QA + DOCS + DEMO</span><h3>Your job is to make the team's work understandable, testable and demo-ready.</h3><p>This is a deliberate non-coding role. You own the evidence package so technical members can stay on the critical path.</p></div><div class="role-stat"><b>Own</b><span>docs/*<br>QA matrix<br>demo script</span></div></div>
-        <div class="section two-col">
-          <div class="panel"><div class="kicker">LEARN FIRST</div><h4>Understand the project, not its internals</h4><ol class="learn-list"><li><b>Know the pipeline</b><span>Data → graph → ML → risk → dashboard.</span></li><li><b>Know the vocabulary</b><span>Anomaly, cluster, fan-in, fan-out, burst, evidence path.</span></li><li><b>Know the UI</b><span>Be able to guide a judge through one complete investigation.</span></li><li><b>Know the claims</b><span>Never say “criminal” or “proven laundering”; say “anomalous” / “investigative lead.”</span></li></ol></div>
-          <div class="panel"><div class="kicker">DELIVERABLES</div><h4>Own these artifacts</h4><div class="file-tree"><code>docs/QA_CHECKLIST.md</code><code>docs/SCENARIOS.md</code><code>docs/JUDGE_QA.md</code><code>docs/demo-script.md</code><code>screenshots/*</code></div><div class="callout">Your evidence should answer: what was injected, what was detected, what score was produced, and why.</div></div>
-        </div>
-        <div class="section"><div class="section-head"><div><div class="kicker">QA MATRIX</div><h4>Test by scenario, not just by button</h4></div></div><div class="qa-grid"><div><b>NORMAL</b><span>Should stay low-risk.</span></div><div><b>BURST</b><span>Should show elevated temporal signals.</span></div><div><b>FAN-OUT</b><span>Should show high out-degree / counterparties.</span></div><div><b>FAN-IN</b><span>Should show high in-degree / consolidation.</span></div><div><b>CHAIN</b><span>Should expose sequential evidence.</span></div><div><b>MIXED</b><span>Should produce combined reasons.</span></div></div></div>
-        <div class="section"><div class="section-head"><div><div class="kicker">DEMO SCRIPT</div><h4>Keep the story under five minutes</h4></div></div><div class="timeline"><div><span>00:00</span><p>Problem: turn raw metadata into ranked investigative leads.</p></div><div><span>00:30</span><p>Upload synthetic dataset and run investigation.</p></div><div><span>01:20</span><p>Open highest-risk entity.</p></div><div><span>02:00</span><p>Show graph + temporal/evidence path.</p></div><div><span>02:45</span><p>Explain anomaly model and why labels are evaluation-only.</p></div><div><span>03:30</span><p>Disable internet and repeat a local run.</p></div><div><span>04:15</span><p>Close with: offline + graph + correlation + explainability.</p></div></div></div>
-        <div class="section"><div class="section-head"><div><div class="kicker">JUDGE QUESTIONS</div><h4>Know these answers cold</h4></div></div><div class="qa-list"><div><b>Why unsupervised?</b><p>Because reliable real-world labels are unavailable in the deployment setting; synthetic labels are kept for evaluation rather than training.</p></div><div><b>Does anomaly mean criminal?</b><p>No. It means the behavior deviates from the learned baseline and should be investigated.</p></div><div><b>Why a graph?</b><p>Because the core intelligence task is relational: how wallets, transactions and network observations connect.</p></div><div><b>Why not a huge neural model?</b><p>The system must run offline on CPU and explain its alerts. Simpler models make that constraint achievable and testable.</p></div></div></div>
-      </section>
+      <section class="section two-col"><div class="panel"><span class="kicker">LEARN FIRST</span><h4>Only learn the UI pieces you need.</h4><ol class="step-list"><li><b>Streamlit</b><span>metrics, tables, buttons, columns, selection and state.</span></li><li><b>PyVis</b><span>nodes, edges, labels, groups and local resources.</span></li><li><b>Investigation flow</b><span>Overview → alerts → entity detail.</span></li><li><b>Offline packaging</b><span>local Python packages and local JS assets.</span></li></ol></div><div class="panel paper"><span class="kicker">FILES</span><h4>Work here</h4><div class="file-list"><code>dashboard/app.py</code><code>dashboard/graph_view.py</code><code>dashboard/components/*</code><code>docker/*</code><code>scripts/test_offline.sh</code></div></div></section>
 
-      <footer class="footer"><span>SIH26146 · team operating manual</span><span>Static / offline / GitHub Pages ready</span></footer>
-    </main>
-  </div>
-  <script src="app.js"></script>
+      <section class="section"><div class="section-head"><div><span class="kicker">BUILD ORDER</span><h4>Build only these screens first</h4></div></div><div class="screen-flow"><div><span>01</span><b>Overview</b><p>Transactions · wallets · IPs · total alerts · high-risk alerts.</p></div><i>→</i><div><span>02</span><b>Ranked Alerts</b><p>Sort by risk. Let the user choose an alert.</p></div><i>→</i><div><span>03</span><b>Investigation</b><p>Graph + reasons + timeline + network context.</p></div></div></section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">VISUAL RULE</span><h4>Show evidence, not generic analytics.</h4></div></div><div class="dashboard-mock"><div class="mock-top"><b>NTRO BTC FORENSICS</b><span>Air-gapped</span></div><div class="mock-metrics"><div>Alerts<strong>128</strong></div><div>High risk<strong>17</strong></div><div>Entities<strong>42k</strong></div><div>Transactions<strong>3.1M</strong></div></div><div class="mock-body"><div class="mock-graph"><span class="mg ip">IP-4</span><span class="mg tx">TX-44</span><span class="mg wallet">W-17</span><span class="mg wallet2">W-21</span><span class="mg tx2">TX-52</span><span class="line l1"></span><span class="line l2"></span><span class="line l3"></span><span class="line l4"></span></div><div class="mock-alert"><small>HIGH PRIORITY</small><h5>W-17 · Risk 91</h5><p>High transaction velocity</p><p>Abnormal fan-out</p><p>IP reused across multiple wallets</p></div></div></div></section>
+
+      <section class="section two-col"><div class="panel warning-panel"><span class="kicker">OFFLINE</span><h4>Build the offline proof, not just the claim.</h4><ol class="step-list"><li><b>Freeze dependencies</b><span>requirements.lock + wheelhouse.</span></li><li><b>Bundle browser assets</b><span>No CDN for PyVis or other runtime resources.</span></li><li><b>Start locally</b><span>localhost only.</span></li><li><b>Disconnect network</b><span>Run the same workflow again.</span></li></ol></div><div class="panel success-panel"><span class="kicker">DONE WHEN</span><h4>Judge test</h4><div class="offline-grid"><span>Network OFF</span><span>Upload CSV</span><span>Run model</span><span>Show graph</span><span>Show reasons</span><span>No error</span></div></div></section>
+    </section>
+
+    <!-- ========================= M6 ========================= -->
+    <section class="page" data-page="m6">
+      <div class="role-hero role-slate"><div><span class="role-badge">M6 · QA + DOCS + DEMO</span><h3>Your job: make the technical work understandable and catch failures before the judges do.</h3><p>This is a support role with real ownership. You are not “just making the PPT.”</p></div><div class="role-stat"><b>Own</b><span>docs/*<br>QA matrix<br>demo script</span></div></div>
+
+      <section class="section two-col"><div class="panel"><span class="kicker">LEARN FIRST</span><h4>Understand the system from the outside.</h4><ol class="step-list"><li><b>Pipeline</b><span>Data → graph → ML → risk → dashboard.</span></li><li><b>Vocabulary</b><span>fan-in, fan-out, burst, anomaly, cluster, evidence path.</span></li><li><b>Claims</b><span>Know the difference between “anomalous” and “criminal”.</span></li><li><b>Demo flow</b><span>Be able to guide a judge through one complete investigation.</span></li></ol></div><div class="panel paper"><span class="kicker">DELIVERABLES</span><h4>Create and maintain</h4><div class="file-list"><code>docs/QA_CHECKLIST.md</code><code>docs/SCENARIOS.md</code><code>docs/JUDGE_QA.md</code><code>docs/demo-script.md</code><code>screenshots/*</code></div></div></section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">TEST THE BEHAVIOUR</span><h4>For each scenario, write down what should happen.</h4></div></div><div class="qa-grid"><div><b>NORMAL</b><span>Should stay mostly low-risk.</span></div><div><b>BURST</b><span>Temporal features should rise.</span></div><div><b>FAN-OUT</b><span>Out-degree / counterparties should rise.</span></div><div><b>FAN-IN</b><span>In-degree / consolidation should rise.</span></div><div><b>CHAIN</b><span>Sequential path should be visible.</span></div><div><b>MIXED</b><span>Multiple evidence reasons should appear.</span></div></div></section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">DEMO SCRIPT</span><h4>Five minutes. No wandering.</h4></div></div><div class="timeline"><div><span>00:00</span><p>Explain the problem: raw metadata is hard to investigate manually.</p></div><div><span>00:30</span><p>Upload the dataset and run the investigation.</p></div><div><span>01:20</span><p>Open the top alert.</p></div><div><span>02:00</span><p>Show its graph, path and reasons.</p></div><div><span>02:45</span><p>Explain XGBoost, Isolation Forest and evaluation.</p></div><div><span>03:30</span><p>Disconnect the network.</p></div><div><span>04:00</span><p>Run again and prove the application still works.</p></div><div><span>04:40</span><p>Close: offline + graph + correlation + explainability.</p></div></div></section>
+
+      <section class="section"><div class="section-head"><div><span class="kicker">JUDGE QUESTIONS</span><h4>Prepare short, honest answers.</h4></div></div><div class="qa-list"><div><b>Why XGBoost?</b><p>It is a strong CPU-friendly choice for our engineered tabular graph/temporal features and gives us a straightforward SHAP path.</p></div><div><b>Why also Isolation Forest?</b><p>It gives an independent unsupervised “how unusual is this?” signal.</p></div><div><b>Why synthetic data?</b><p>The PS requires synthetic data. We keep ground truth for evaluation and deliberately test on different generated distributions.</p></div><div><b>Does an alert prove crime?</b><p>No. It is an investigative lead based on behavioural and relational evidence.</p></div><div><b>Why a graph?</b><p>Because the useful question is often “what is connected to this entity?” rather than “what does this one row look like?”</p></div></div></section>
+    </section>
+
+    <footer class="footer"><span>SIH26146 · Team Field Manual</span><span>Keep it simple enough that every member can explain their own work.</span></footer>
+  </main>
+</div>
+<script src="app.js"></script>
 </body>
 </html>

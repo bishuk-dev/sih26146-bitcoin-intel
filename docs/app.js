@@ -1,52 +1,48 @@
 (function () {
-  const buttons = Array.from(document.querySelectorAll('.nav-item'));
-  const pages = Array.from(document.querySelectorAll('.page'));
+  const buttons = [...document.querySelectorAll('.nav-item')];
+  const pages = [...document.querySelectorAll('.page')];
   const title = document.getElementById('pageTitle');
   const menuBtn = document.getElementById('menuBtn');
-  const copyBtn = document.getElementById('copyLink');
   const sidebar = document.getElementById('sidebar');
 
   const titles = {
-    main: 'Main · How everything fits',
+    main: 'Main · Understand the whole project',
     m1: 'M1 · Data + Synthetic Generation',
     m2: 'M2 · Graph + Entity Resolution',
-    m3: 'M3 · ML + Clustering',
+    m3: 'M3 · ML / Detection Engineering',
     m4: 'M4 · Risk + Integration',
-    m5: 'M5 · Dashboard + Offline',
+    m5: 'M5 · Product + Offline',
     m6: 'M6 · QA + Docs + Demo'
   };
 
-  function activate(tab, push = true) {
+  function validTab(tab) { return Object.prototype.hasOwnProperty.call(titles, tab); }
+
+  function activate(tab, writeHash = true) {
+    if (!validTab(tab)) tab = 'main';
     buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
     pages.forEach(page => page.classList.toggle('active-page', page.dataset.page === tab));
-    title.textContent = titles[tab] || titles.main;
-    document.title = `SIH26146 · ${titles[tab] || titles.main}`;
-    if (push) history.replaceState(null, '', `#${tab}`);
+    title.textContent = titles[tab];
+    document.title = `SIH26146 · ${titles[tab]}`;
+    if (writeHash) history.replaceState(null, '', `#${tab}`);
     document.body.classList.remove('menu-open');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  const initial = location.hash.replace('#', '') || 'main';
-  activate(titles[initial] ? initial : 'main', false);
+  const initial = (location.hash || '#main').slice(1);
+  activate(initial, false);
 
-  buttons.forEach(btn => btn.addEventListener('click', () => activate(btn.dataset.tab)));
-  window.addEventListener('hashchange', () => {
-    const tab = location.hash.replace('#', '') || 'main';
-    activate(titles[tab] ? tab : 'main', false);
+  buttons.forEach(button => button.addEventListener('click', () => activate(button.dataset.tab)));
+  window.addEventListener('hashchange', () => activate((location.hash || '#main').slice(1), false));
+
+  menuBtn?.addEventListener('click', event => {
+    event.stopPropagation();
+    document.body.classList.toggle('menu-open');
   });
 
-  if (menuBtn) menuBtn.addEventListener('click', () => document.body.classList.toggle('menu-open'));
-  if (copyBtn) {
-    copyBtn.addEventListener('click', async () => {
-      const url = window.location.href;
-      try {
-        await navigator.clipboard.writeText(url);
-        const old = copyBtn.textContent;
-        copyBtn.textContent = 'Copied';
-        setTimeout(() => (copyBtn.textContent = old), 1100);
-      } catch (e) {
-        window.prompt('Copy this tab link:', url);
-      }
-    });
-  }
+  document.addEventListener('click', event => {
+    if (!document.body.classList.contains('menu-open')) return;
+    if (sidebar && !sidebar.contains(event.target) && !menuBtn?.contains(event.target)) {
+      document.body.classList.remove('menu-open');
+    }
+  });
 })();
