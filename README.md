@@ -88,6 +88,9 @@ the deadline — this is the single most common way teams lose points on this PS
 
 See `docs/role_assignments.md`.
 
-### Team website
+## Full project context (for AI-assisted mentoring)
 
-The detailed role roadmaps and integration guide live in `docs/index.html`. Because the site is plain HTML/CSS/JS with no external assets, GitHub Pages can serve it directly from the `docs/` folder.
+See `AI_CONTEXT.md` — a single self-contained file with the full problem statement,
+architecture, key decisions, and a detailed task breakdown per team member. Any team member
+can paste that whole file into an AI chat and ask "what's my work as Member X?" to get
+role-specific guidance.
