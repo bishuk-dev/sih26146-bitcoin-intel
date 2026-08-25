@@ -2,14 +2,14 @@
 
 Use `index.html` as the main team handbook.
 
-| Member | Owns | Main files |
-|---|---|---|
-| M1 | Data + synthetic generator | `data/generator/*`, `src/ingestion/*` |
-| M2 | Graph + entity resolution | `src/graph/*` |
-| M3 | ML / detection | `src/ml/*`, ML experiments |
-| M4 | Risk + integration | `src/scoring/*`, `src/pipeline.py` |
-| M5 | Dashboard + offline deployment | `dashboard/*`, `docker/*`, `scripts/*` |
-| M6 | QA + docs + demo | `docs/*`, QA matrix, demo script |
+| Member     | Owns                           | Main files                             |
+| ---------- | ------------------------------ | -------------------------------------- |
+| M1-Bhavya  | Data + synthetic generator     | `data/generator/*`, `src/ingestion/*`  |
+| M2-Arjun   | Graph + entity resolution      | `src/graph/*`                          |
+| M3-Bishu   | ML / detection                 | `src/ml/*`, ML experiments             |
+| M4-Shubham | Risk + integration             | `src/scoring/*`, `src/pipeline.py`     |
+| M5-Harsh   | Dashboard + offline deployment | `dashboard/*`, `docker/*`, `scripts/*` |
+| M6-Aditi   | QA + docs + demo               | `docs/*`, QA matrix, demo script       |
 
 ## Working rule
 
