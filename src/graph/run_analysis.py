@@ -5,6 +5,7 @@ from pattern_detector import (
     find_transaction_chains,
     calculate_chain_risk
 )
+from report_generator import generate_report, save_report
 
 
 # Create graph from CSV
@@ -71,6 +72,18 @@ chain_results = calculate_chain_risk(
     graph,
     chains
 )
+report = generate_report(
+    graph,
+    sent,
+    received,
+    transaction_count,
+    risk,
+    chain_results
+)
+
+save_report(report)
+
+print("\nAnalysis report saved successfully.")
 
 for chain in chain_results:
 

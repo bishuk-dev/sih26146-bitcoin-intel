@@ -1,0 +1,80 @@
+{
+    "total_wallets": 4,
+    "total_transactions": 6,
+    "wallets": [
+        {
+            "wallet": "W1",
+            "sent": 12500.0,
+            "received": 13500.0,
+            "transactions": 2,
+            "risk": "HIGH",
+            "risk_score": 70
+        },
+        {
+            "wallet": "W2",
+            "sent": 14500.0,
+            "received": 12500.0,
+            "transactions": 2,
+            "risk": "HIGH",
+            "risk_score": 70
+        },
+        {
+            "wallet": "W3",
+            "sent": 11500.0,
+            "received": 12000.0,
+            "transactions": 1,
+            "risk": "HIGH",
+            "risk_score": 50
+        },
+        {
+            "wallet": "W4",
+            "sent": 11000.0,
+            "received": 11500.0,
+            "transactions": 1,
+            "risk": "HIGH",
+            "risk_score": 50
+        }
+    ],
+    "chains": [
+        {
+            "path": [
+                "W1",
+                "W2",
+                "W3"
+            ],
+            "length": 3,
+            "score": 50,
+            "risk": "HIGH"
+        },
+        {
+            "path": [
+                "W2",
+                "W3",
+                "W4"
+            ],
+            "length": 3,
+            "score": 80,
+            "risk": "HIGH"
+        },
+        {
+            "path": [
+                "W3",
+                "W4",
+                "W1"
+            ],
+            "length": 3,
+            "score": 80,
+            "risk": "HIGH"
+        },
+        {
+            "path": [
+                "W4",
+                "W1",
+                "W2"
+            ],
+            "length": 3,
+            "score": 50,
+            "risk": "HIGH"
+        }
+    ]
+}

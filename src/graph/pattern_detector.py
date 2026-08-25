@@ -32,22 +32,26 @@ def calculate_chain_risk(graph, chains):
 
         score = 0
 
-        # Check transactions along the chain
+        # Check every transaction in the chain
         for i in range(len(path) - 1):
 
             source = path[i]
             target = path[i + 1]
 
-            for _, _, data in graph.edges(
+            # Get all transactions between source and target
+            edge_data = graph.get_edge_data(
                 source,
-                target,
-                data=True
-            ):
+                target
+            )
 
-                if data["amount"] >= 10000:
-                    score += 30
+            if edge_data:
 
-        # Longer chain = additional risk
+                for key, data in edge_data.items():
+
+                    if data["amount"] >= 10000:
+                        score += 30
+
+        # A 3-wallet chain gets an additional score
         if chain["length"] >= 3:
             score += 20
 
