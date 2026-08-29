@@ -1,8 +1,9 @@
 from fastapi import FastAPI
-from graph.graph_builder import create_graph
-from graph.analyzer import analyze_graph, calculate_risk
-from graph.risk_detector import find_high_value_transactions
-from graph.pattern_detector import (
+
+from src.graph.graph_builder import create_graph
+from src.graph.analyzer import analyze_graph, calculate_risk
+from src.graph.risk_detector import find_high_value_transactions
+from src.graph.pattern_detector import (
     find_transaction_chains,
     calculate_chain_risk
 )
